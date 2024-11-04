@@ -6,19 +6,20 @@ The R packages, in the format "package (version)," required for this analysis ar
 For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4).
 
 To complete the analysis more quickly in chunks, perform the following steps:
-1. Install the necessary R packages by running `installPackages.R` in the `code` folder.
-2. Call the bash file `runCodeBeforeQGIS.sh`
-3. Open QGIS.
-4. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
-5. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
-6. Hit 'Run.'
-7. Call the bash file `runCodeAfterQGIS.sh`
-8. Call the bash file `runCodePlots.sh`
-9. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
-10. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
-11. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
-12. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
-13. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
+1. Replace `/storage/work/svr5482` with the location of your `probDnsclRealData` folder.
+2. Install the necessary R packages by running `installPackages.R` in the `code` folder.
+3. Call the bash file `runCodeBeforeQGIS.sh`
+4. Open QGIS.
+5. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
+6. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
+7. Hit 'Run.'
+8. Call the bash file `runCodeAfterQGIS.sh`
+9. Call the bash file `runCodePlots.sh`
+10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
+11. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
+12. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
+13. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
+14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
 
 
 **Setup**
