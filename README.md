@@ -117,3 +117,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`
 2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`
 3. In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`
+
+
+## Contact
+Please contact Samantha Roth at samantha.m.roth@dartmouth.edu with any reproduction issues.
