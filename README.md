@@ -29,7 +29,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
 
 
-**To run each R script individually not using bash files, follow the steps below**
+**To run each R script individually not using bash files, follow the steps below. All R scripts are located in the `code` folder.**
 
 **Setup**
 1. Install packages needed for the main analysis and visualization: `installPackages.R`
