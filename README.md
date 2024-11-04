@@ -9,10 +9,15 @@ To complete the analysis more quickly in chunks, perform the following steps:
 1. Call the bash file `runCodeBeforeQGIS.sh`
 2. Open QGIS.
 3. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
-4. Select the raster `bin10m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
+4. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
 5. Hit 'Run.'
 6. Call the bash file `runCodeAfterQGIS.sh`
 7. Call the bash file `runCodePlots.sh`
+8. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
+9. Repeat steps 2-5, in step 4 replacing ~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
+10. Repeat steps 2-5, in step 4 replacing ~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
+11. Repeat steps 2-5, in step 4 replacing ~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
+12. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
 
 
 **Setup**
