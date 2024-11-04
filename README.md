@@ -6,8 +6,12 @@ The R packages, in the format "package (version)," required for this analysis ar
 For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4).
 
 To complete the analysis more quickly in chunks, perform the following steps:
-1. Call the bash file runCodeBeforeQGIS.sh
-2. 
+1. Call the bash file `runCodeBeforeQGIS.sh`
+2. Open QGIS.
+3. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
+4. Select the raster `bin10m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
+5. Hit 'Run.'
+6. Call the bash file `runCodeAfterQGIS.sh`
 
 **Setup**
 1. Install packages needed for the main analysis and visualization: `installPackages.R`
