@@ -12,6 +12,8 @@ To complete the analysis more quickly in chunks, perform the following steps:
 4. Select the raster `bin10m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
 5. Hit 'Run.'
 6. Call the bash file `runCodeAfterQGIS.sh`
+7. Call the bash file `runCodePlots.sh`
+
 
 **Setup**
 1. Install packages needed for the main analysis and visualization: `installPackages.R`
