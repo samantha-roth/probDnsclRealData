@@ -14,7 +14,7 @@ For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggm
 ## Reproduction
 To complete the analysis more quickly in chunks, perform the following steps:
 1. In all bash files, replace `/storage/work/svr5482` with the location of your `probDnsclRealData` folder.
-2. Install the necessary R packages by running `installPackages.R` in the `code` folder.
+2. Install the necessary R packages by running `installPackages.R` in the `code` folder. Alternatively, you can install the necessary R packages by calling the bash file `probDnscl_env.sh`.
 3. Call the bash file `runCodeBeforeQGIS.sh`
 4. Open QGIS.
 5. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
