@@ -13,7 +13,7 @@ For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggm
 
 ## Reproduction
 To complete the analysis more quickly in chunks, perform the following steps:
-1. In all bash files, replace `/storage/work/svr5482` with the location of your `probDnsclRealData` folder.
+1. In all bash files, replace `/storage/work/svr5482` with the location of your `probDnsclRealData` folder. Edit the bash files as necessary to schedule R scripts to be run on your local machine or the cluster of your choice. Examples are provides for Penn State University's ROAR supercomputer and a Mac laptop.
 2. Install the necessary R packages by running `installPackages.R` in the `code` folder. Alternatively, you can install the necessary R packages by calling the bash file `probDnscl_env.sh`.
 3. Call the bash file `runCodeBeforeQGIS.sh`
 4. Open QGIS.
@@ -23,10 +23,10 @@ To complete the analysis more quickly in chunks, perform the following steps:
 8. Call the bash file `runCodeAfterQGIS.sh`
 9. Call the bash file `runCodePlots.sh`
 10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
-11. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
-12. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
-13. Repeat steps 2-5, in step 4 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
-14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
+11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
+12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
+13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
+14. Call the bash file `runCodeOtherStormsAfterQGIS.sh` 
 
 
 **To run each R script individually not using bash files, follow the steps below. All R scripts are located in the `code` folder.**
