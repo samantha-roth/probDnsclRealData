@@ -12,9 +12,6 @@ pt<-proc.time()
 #load 5m coords
 load("data/coords.5m.RData")
 
-dem5m<- rast("data/norristown_5m.asc")
-WGS84<- crs(dem5m)
-
 flood<- c("flood2014","flood2020","floodfuture")
 
 for(f in 1:length(flood)){
@@ -39,8 +36,8 @@ for(f in 1:length(flood)){
   bin5m<- run5m
   values(bin5m)<- vals5mBin
   
-  crs(bin10m)<- WGS84
-  crs(bin5m)<- WGS84
+  crs(bin10m)<- "+proj=utm +zone=18 +datum=WGS84  +units=m"
+  crs(bin5m)<- "+proj=utm +zone=18 +datum=WGS84  +units=m"
   
   writeRaster(bin10m,file=paste0("data/",flood[f],"/bin10mat5m.tif"),overwrite=TRUE)
   writeRaster(bin5m,paste0("data/",flood[f],"/bin5m.tif"),overwrite=TRUE)

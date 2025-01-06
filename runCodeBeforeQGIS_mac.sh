@@ -1,45 +1,45 @@
 #!/bin/bash
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript getCoordsFromRuns.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript getCoordsFromRuns.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript get5mCoordsAroundHWMs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript get5mCoordsAroundHWMs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript getWetIndsAroundHWMs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript getWetIndsAroundHWMs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript getAdjPredsAtAndAroundHWMs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript getAdjPredsAtAndAroundHWMs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/evaluation
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-Rscript dnsclAroundHWMs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript dnsclAroundHWMs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/evaluation
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-Rscript dnsclAtHWMs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript dnsclAtHWMs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/evaluation
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-Rscript compareBds.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript compareBds.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/evaluation
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-Rscript floodByElev.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript floodByElev.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/models
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
 
-Rscript modelProbFloodbyElev.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript modelProbFloodbyElev.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript getProbFloodatDestLocs.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript getProbFloodatDestLocs.R "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /Users/f007f8t/Documents/GitHub/probDnsclRealData/code/dataProcessing
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-Rscript costDistPrep_FloodArea.R "/Users/f007f8t/Documents/GitHub/probDnsclRealData"
+Rscript costDistPrep_FloodArea.R "/Users/f007f8t/Documents/probDnsclRealData"
