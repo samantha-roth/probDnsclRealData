@@ -1,25 +1,26 @@
 rm(list=ls())
 
-setwd("C:/Users/svr5482")
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
 
 library(terra)
 library(ggplot2)
 
 #load the bilinearly interpolated AND SHIFTED 10m projections at the HWM locations
-load("C:/Users/svr5482/probDnsclRealData/data/downscale10mto5mAtHWMs.RData")
+load("data/downscale10mto5mAtHWMs.RData")
 
 downscale10mAtHWMs<- downscale10m; rm(downscale10m)
 
 #load the high water marks
-load("probDnsclRealData/data/HWMsdf.RData")
+load("data/HWMsdf.RData")
 HWMlocs<- as.matrix(HWMs.df[,c("x","y")]); HWMlocs<- HWMlocs[1:5,]
 obs<- HWMs.df$height[1:5]
 
 #get 5m preds at HWM locations
-run5m<- rast("FloodingModelCalibrationProject/04-Spatial_Stats_Samantha/Outputs5m/Norristown/nCh/PostMedCh/Extent/Run_1.asc")
+run5m<- rast("data/Outputs5m/Run_1.asc")
 preds5matHWMs<- c(as.matrix(extract(run5m,HWMlocs)))
 
-run10m<- rast("FloodingModelCalibrationProject/04-Spatial_Stats_Samantha/Outputs10m/Norristown/nCh/PostMedCh/Extent/Run_1.asc")
+run10m<- rast("data/Outputs10m/Run_1.asc")
 preds10matHWMs<- c(as.matrix(extract(run10m,HWMlocs)))
 
 
@@ -36,7 +37,7 @@ ggplot(data=predsVSobs,aes(x=downscale10mto5m,y=obs))+
   geom_point(color="red")+
   geom_abline(intercept=0,slope=1)
 
-filename<- paste0("probDnsclRealData/plots/pred5mVSobs.jpeg")
+filename<- paste0("plots/pred5mVSobs.jpeg")
 jpeg(file = filename,width = 600,height=500)
 print(ggplot(data=predsVSobs,aes(x=preds5m,y=obs))+
   geom_point(color="red",size=5)+
