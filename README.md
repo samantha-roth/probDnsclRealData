@@ -108,7 +108,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 5. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
 
 **Plot results**
-1. In the `plots` folder, plot accuracy over the entire region: `plotAccuracyWholeRegion.R`
+1. In the `plots` folder, plot the Hurricane Ida observations against the high resolution flood projection values: `plotObsVSPreds.R`
 2. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`
 3. In the `plots` folder, plot the predictive distribution of flood heights, the low resolution flood height, and the high resolution flood height at the high water mark locations: `plotDistatHWMs_Dnscl.R`
 4. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
