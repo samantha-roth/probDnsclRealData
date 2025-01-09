@@ -2,6 +2,7 @@ rm(list=ls())
 
 library(terra)
 library(DescTools)
+library(ggplot2)
 
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
@@ -108,12 +109,46 @@ mean(pctFloodedbyElev10m-pctFloodedbyElev5m)
 
 midpts<- divs[1:(length(divs)-1)]+len/2
 
+pctFloodbyElev.df<- data.frame("Elevation"= c(midpts,midpts),
+                               "pctFlooded"= c(pctFloodedbyElev10m,pctFloodedbyElev5m),
+                               "Resolution"= c(rep("10m",length(midpts)),rep("5m",length(midpts))))
+
+filename<- paste0("plots/elevVSfloodprob.jpeg")
+jpeg(file = filename,width = 600,height=500)
+print(ggplot(data = pctFloodbyElev.df, aes(x = Elevation, y = pctFlooded, color = Resolution)) +
+  geom_point() +
+  ggtitle("Elevation VS flooding probability") +
+  ylab("Flooding probability")+ xlab("Elevation (m)")+
+  theme(plot.title = element_text(size=24), 
+        axis.title = element_text(size=24),
+        axis.text = element_text(size = 20),
+        legend.text= element_text(size=24),
+        legend.title= element_text(size=24)))
+dev.off()
+
 
 plot(midpts,pctFloodedbyElev10m,
      xlab="Approx. Elev",
      ylab="Probability of Being Flooded",
      main="Approx. Elev VS Probability of Flooding")
 points(midpts,pctFloodedbyElev5m,col="red")
+
+
+midpts
+
+filename<- paste0("plots/elev_vs_pctflooded.jpeg")
+jpeg(file = filename,width = 600,height=500)
+print(ggplot(data=predsVSobs,aes(x=preds5m,y=obs))+
+        geom_point(color=,size=5)+
+        geom_abline(intercept=0,slope=1,lwd = 2) +
+        ylab("Observed Flood Height (m)")+ xlab("5m Resolution Predicted Flood Height (m)")+
+        theme_bw() + 
+        theme(plot.title = element_text(size=24), 
+              axis.title = element_text(size=24),
+              axis.text = element_text(size = 20),
+              legend.text= element_text(size=24),
+              legend.title= element_text(size=24)))
+dev.off()
 
 
 midpts[which(abs(pctFloodedbyElev10m-pctFloodedbyElev5m)>.05)]
