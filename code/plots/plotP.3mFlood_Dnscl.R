@@ -121,7 +121,7 @@ df<- data.frame("flooding"= pFlood,
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
 sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(0, 1))
 
-filename<- "plots/BusAreaSpatPFlood.3m_10mto5mElev_QGIS.jpeg"
+filename<- "plots/pflood.3m_Dnscl_QGIS.jpeg"
 jpeg(file = filename,width = 690,height=350)
 Norristown_plot +
   geom_point(data = df, alpha = 0.5, shape=15, size= 2,
