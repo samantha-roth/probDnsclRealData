@@ -17,7 +17,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 2. Install the necessary R packages by running `installPackages.R` in the `code` folder.
 3. Call the bash file `runCodeBeforeQGIS.sh`
 4. Open QGIS.
-5. Look under the section 'GIS Analysis- Distance Tools' under the Whitebox Tools section of the processing toolbar in QGIS. Select 'Cost Distance.'
+5. Go to the processing toolbox and search for CostDistance, which will show up under Whitebox Tools.
 6. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
 7. Hit 'Run.'
 8. Call the bash file `runCodeAfterQGIS.sh`
