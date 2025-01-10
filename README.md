@@ -15,18 +15,18 @@ For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggm
 To complete the analysis more quickly in chunks, perform the following steps:
 1. In all bash files, replace `/Users/f007f8t/Documents` with the location of your `probDnsclRealData` folder. Edit the bash files as necessary to schedule R scripts to be run on your local machine or the cluster of your choice. Examples are provided for a Mac laptop.
 2. Install the necessary R packages by running `installPackages.R` in the `code` folder.
-3. Call the bash file `runCodeBeforeQGIS.sh`
+3. Call the bash file `runCodeBeforeQGIS.sh`. This should take less than a minute to execute. 
 4. Open QGIS.
 5. Go to the processing toolbox and search for CostDistance, which will show up under Whitebox Tools.
 6. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`. It does not matter whether the 'Open output file after running algorithm' boxes are checked. The output cost accumulation file does not need to be saved.
 7. Hit 'Run.'
-8. Call the bash file `runCodeAfterQGIS.sh`
-9. Call the bash file `runCodePlots.sh`
-10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
+8. Call the bash file `runCodeAfterQGIS.sh`. This should not take more than a couple minutes to execute.
+9. Call the bash file `runCodePlots.sh`. This should only take seconds to execute.
+10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`. This should not take more than a minute to execute.
 11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014` when selecting `bin10mat5m.tif` as the 'Input Source File' 
 12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020` when selecting `bin10mat5m.tif` as the 'Input Source File' 
 13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting `bin10mat5m.tif` as the 'Input Source File' 
-14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
+14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`. This should not take more than a few minutes to execute.
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 
 **To run each R script individually not using bash files, follow the steps below. All R scripts are located in the `code` folder.**
