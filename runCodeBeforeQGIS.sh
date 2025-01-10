@@ -1,46 +1,47 @@
 #!/bin/bash
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+DATA_PATH= "/Users/f007f8t/Documents/probDnsclRealData"
 
-Rscript getCoordsFromRuns.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+Rscript getCoordsFromRuns.R "$DATA_PATH"
 
-Rscript get5mCoordsAroundHWMs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+Rscript get5mCoordsAroundHWMs.R "$DATA_PATH"
 
-Rscript getWetIndsAroundHWMs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+Rscript getWetIndsAroundHWMs.R "$DATA_PATH"
 
-Rscript getAdjPredsAtAndAroundHWMs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
+Rscript getAdjPredsAtAndAroundHWMs.R "$DATA_PATH"
 
-Rscript dnsclAroundHWMs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
+Rscript dnsclAroundHWMs.R "$DATA_PATH"
 
-Rscript dnsclAtHWMs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
+Rscript dnsclAtHWMs.R "$DATA_PATH"
 
-Rscript compareBds.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
+Rscript compareBds.R "$DATA_PATH"
 
-Rscript floodByElev.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-cd /storage/work/svr5482/probDnsclRealData/code/models
+Rscript floodByElev.R "$DATA_PATH"
 
-Rscript modelProbFloodbyElev.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+Rscript modelProbFloodbyElev.R "$DATA_PATH"
 
-Rscript getProbFloodatDestLocs.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
+Rscript getProbFloodatDestLocs.R "$DATA_PATH"
 
-Rscript costDistPrep_FloodArea.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
 
+Rscript costDistPrep_FloodArea.R "$DATA_PATH"

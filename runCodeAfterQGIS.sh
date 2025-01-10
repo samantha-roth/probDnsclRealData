@@ -1,44 +1,46 @@
 #!/bin/bash
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
-Rscript getFloodedCellFromBackLink.R "/storage/work/svr5482/probDnsclRealData"
+DATA_PATH= "/Users/f007f8t/Documents/probDnsclRealData"
 
-cd /storage/work/svr5482/probDnsclRealData/code/dataProcessing
-Rscript getSourcesForDests.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
+Rscript getFloodedCellFromBackLink.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript dnsclSource.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/dataProcessing
+Rscript getSourcesForDests.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/models
-Rscript getMeanIfNot0ForDestCells.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript dnsclSource.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/models
-Rscript probDestCellsWetVSDry.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
+Rscript getMeanIfNot0ForDestCells.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/models
-Rscript probDestCellsFlood.3m.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
+Rscript probDestCellsWetVSDry.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/models
-Rscript getCDFandPDFatDests.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
+Rscript probDestCellsFlood.3m.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript sensitivityAndSpecificityWetCells.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/models
+Rscript getCDFandPDFatDests.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript sensitivityAndSpecificity.3mWetCells.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript sensitivityAndSpecificityWetCells.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript comparePredMeanToTruthDest.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript sensitivityAndSpecificity.3mWetCells.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript comparePredMeanToTruthDest.R "$DATA_PATH"
 
-Rscript getTotalMAE95PIAccuracy.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript getTotalSensitivitySpecificity.R "/storage/work/svr5482/probDnsclRealData"
+Rscript getTotalMAE95PIAccuracy.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/evaluation
-Rscript getTotalSensitivitySpecificity.3mFlood.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript getTotalSensitivitySpecificity.R "$DATA_PATH"
 
-cd /storage/work/svr5482/probDnsclRealData/code/comparison/costgrow
-Rscript costgrow10mto5m_MethodArea1.R "/storage/work/svr5482/probDnsclRealData"
+cd /Users/f007f8t/Documents/probDnsclRealData/code/evaluation
+Rscript getTotalSensitivitySpecificity.3mFlood.R "$DATA_PATH"
+
+cd /Users/f007f8t/Documents/probDnsclRealData/code/comparison/costgrow
+Rscript costgrow10mto5m_MethodArea1.R "$DATA_PATH"

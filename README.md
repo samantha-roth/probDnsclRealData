@@ -6,14 +6,14 @@ This repository stores the entire workflow for the paper "Probabilistic Downscal
 
 ## Setup
 
-This workflow has been tested using R version 4.2.1 (Funny-Looking Kid) on a laptop operating under Windows 10 with a 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz processor and a 64-bit operating system. This workflow has also been tested using R version 4.4.2 (Pile of Leaves) on a laptop operating with macOS Sequoia 15.2 and an Apple M3 chip. To perform cost distance analysis, we use the Whitebox Tools package in QGIS version 3.34.10. To install the Whitebox Tools package, follow installation instructions at https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html.
+This workflow has been tested using R version 4.2.1 (Funny-Looking Kid) on a laptop operating under Windows 10 with a 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz processor and a 64-bit operating system. This workflow has also been tested using R version 4.4.2 (Pile of Leaves) on laptops operating with (1) macOS Sequoia 15.2 and an Apple M3 chip and (2) macOS Sonoma 15.2 with an Apple M1 Max chip. To perform cost distance analysis, we use the Whitebox Tools package in QGIS version 3.34.10. To install the Whitebox Tools package, follow installation instructions at https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html.
 
 The R packages, in the format "package (version)," required for this analysis are `terra` (1.7-3), `akima` (0.6-3.4), `DescTools` (0.99.54), `MASS` (7.3-58.2), `Matrix` (1.6-1.1), `fields` (14.1), `mvtnorm` (1.1-3), and `spam` (2.9-1). 
 For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4).
 
 ## Reproduction
 To complete the analysis more quickly in chunks, perform the following steps:
-1. In all bash files, replace `/storage/work/svr5482` with the location of your `probDnsclRealData` folder. Edit the bash files as necessary to schedule R scripts to be run on your local machine or the cluster of your choice. Examples are provides for Penn State University's ROAR supercomputer and a Mac laptop.
+1. In all bash files, replace `/Users/f007f8t/Documents` with the location of your `probDnsclRealData` folder. Edit the bash files as necessary to schedule R scripts to be run on your local machine or the cluster of your choice. Examples are provided for a Mac laptop.
 2. Install the necessary R packages by running `installPackages.R` in the `code` folder.
 3. Call the bash file `runCodeBeforeQGIS.sh`
 4. Open QGIS.
