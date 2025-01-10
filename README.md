@@ -9,7 +9,7 @@ This repository stores the entire workflow for the paper "Probabilistic Downscal
 This workflow has been tested using R version 4.2.1 (Funny-Looking Kid) on a laptop operating under Windows 10 with a 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz processor and a 64-bit operating system. This workflow has also been tested using R version 4.4.2 (Pile of Leaves) on laptops operating with (1) macOS Sequoia 15.2 and an Apple M3 chip and (2) macOS Sonoma 15.2 with an Apple M1 Max chip. To perform cost distance analysis, we use the Whitebox Workflows for QGIS plugin for QGIS version 3.34.10. To install the Whitebox Workflows plugin, follow installation instructions at https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html.
 
 The R packages, in the format "package (version)," required for this analysis are `terra` (1.7-3), `akima` (0.6-3.4), `DescTools` (0.99.54), `MASS` (7.3-58.2), `Matrix` (1.6-1.1), `fields` (14.1), `mvtnorm` (1.1-3), and `spam` (2.9-1). 
-For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4).
+For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4). Before installing the necessary R packages, we recommend updating R to version 4.4.2 and deleting any dependences for any of these R packages that were installed on an earlier version of R.
 
 ## Reproduction
 To complete the analysis more quickly in chunks, perform the following steps:
@@ -23,9 +23,9 @@ To complete the analysis more quickly in chunks, perform the following steps:
 8. Call the bash file `runCodeAfterQGIS.sh`
 9. Call the bash file `runCodePlots.sh`
 10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`
-11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
-12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
-13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
+11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014` when selecting `bin10mat5m.tif` as the 'Input Source File' 
+12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020` when selecting `bin10mat5m.tif` as the 'Input Source File' 
+13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting `bin10mat5m.tif` as the 'Input Source File' 
 14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 
