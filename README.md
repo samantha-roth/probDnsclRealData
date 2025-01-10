@@ -26,8 +26,8 @@ To complete the analysis more quickly in chunks, perform the following steps:
 11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014`
 12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020`
 13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture`
-14. Call the bash file `runCodeOtherStormsAfterQGIS.sh` 
-
+14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`
+15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 
 **To run each R script individually not using bash files, follow the steps below. All R scripts are located in the `code` folder.**
 
@@ -109,7 +109,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 **Plot results**
 1. In the `plots` folder, plot the Hurricane Ida observations against the high resolution flood projection values: `plotObsVSPreds.R`
-2. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`
+2. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`.
 3. In the `plots` folder, plot the predictive distribution of flood heights, the low resolution flood height, and the high resolution flood height at the high water mark locations: `plotDistatHWMs_Dnscl.R`
 4. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
 
