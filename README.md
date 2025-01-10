@@ -18,7 +18,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 3. Call the bash file `runCodeBeforeQGIS.sh`
 4. Open QGIS.
 5. Go to the processing toolbox and search for CostDistance, which will show up under Whitebox Tools.
-6. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`.
+6. From the folder `~/probDnsclRealData/data`, select the raster `bin10mat5m.tif` as the 'Input Source File' and the raster `norristown_5m.tif` as the 'Input Cost (Friction) File.' Under 'Output Backlink File,' specify the name `backlink_QGIS.tif` and the folder `~/probDnsclRealData/data`. It does not matter whether the 'Open output file after running algorithm' boxes are checked.
 7. Hit 'Run.'
 8. Call the bash file `runCodeAfterQGIS.sh`
 9. Call the bash file `runCodePlots.sh`
