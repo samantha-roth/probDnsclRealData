@@ -23,13 +23,14 @@ To complete the analysis more quickly in chunks, perform the following steps:
 8. Call the bash file `runCodeAfterQGIS.sh`. This should not take more than a couple minutes to execute.
 9. Call the bash file `runCodePlots.sh`. This should only take seconds to execute.
 10. Call the bash file `runCodeOtherStormsBeforeQGIS.sh`. This should not take more than a minute to execute.
-11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014` when selecting `bin10mat5m.tif` as the 'Input Source File' 
-12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020` when selecting `bin10mat5m.tif` as the 'Input Source File' 
-13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting `bin10mat5m.tif` as the 'Input Source File' 
+11. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014` when selecting `bin10mat5m.tif` as the 'Input Source File'. Also, replace `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2014` when selecting the folder to save `backlink_QGIS.tif` to.
+12. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020` when selecting `bin10mat5m.tif` as the 'Input Source File'. Also, replace `~/probDnsclRealData/data` with `~/probDnsclRealData/data/flood2020` when selecting the folder to save `backlink_QGIS.tif` to.
+13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting `bin10mat5m.tif` as the 'Input Source File'. Also, replace `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting the folder to save `backlink_QGIS.tif` to.
 14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`. This should not take more than a few minutes to execute.
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
+16. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder.
 
-**To run each R script individually not using bash files, follow the steps below. All R scripts are located in the `code` folder.**
+**To run each R script individually not using bash files, follow the steps below. All subsequent folders are located in the `code` folder.**
 
 **Setup**
 1. Install packages needed for the main analysis and visualization: `installPackages.R`
