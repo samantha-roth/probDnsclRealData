@@ -28,7 +28,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 13. Repeat steps 4-7, in step 6 replacing `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting `bin10mat5m.tif` as the 'Input Source File'. Also, replace `~/probDnsclRealData/data` with `~/probDnsclRealData/data/floodfuture` when selecting the folder to save `backlink_QGIS.tif` to.
 14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`. This should not take more than a few minutes to execute.
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
-16. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder.
+16. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
 - If you wish to downscale flood projections using CostGrow for comparison, please see the corresponding section at the bottom of the file.
 
@@ -115,6 +115,8 @@ To complete the analysis more quickly in chunks, perform the following steps:
 2. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`.
 3. In the `plots` folder, plot the predictive distribution of flood heights, the low resolution flood height, and the high resolution flood height at the high water mark locations: `plotDistatHWMs_Dnscl.R`
 4. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
+5. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
+6. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
 **Comparison to CostGrow**
 *To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
