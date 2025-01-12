@@ -19,15 +19,23 @@ print(paste0("The reported percent of flooded cells correctly identified by PDFl
 
 print(paste0("The reported percent of nonflooded cells correctly identified by PDFlood is 100%. The percent that you obtained is ",round(totalSpec,2)*100,"%."))
 
-data <- data.frame(
+#Table 3
+table3 <- data.frame(
   Approach = c("Mean absolute error", "95% prediction interval coverage", "Percent of flooded and nonflooded cells correctly identified"),
   PDFlood = c(round(MAE,2), round(PI95accuracy,2)*100, round(accuracy,2)*100),
   CostGrow = c(round(MAE.costgrow,2), NA, round(accuracy.costgrow,2)*100)
 )
 
 #jpeg(filename="plots/table3.jpeg",width=600,height=500)
-print(data)
+print(table3)
 #dev.off()
 
+#Table 5
+table5 <- data.frame(
+  Approach = c("Percent of flooded cells correctly identified","Percent of nonflooded cells correctly identified"),
+  PDFlood = c(round(totalSens,2)*100,round(totalSpec,2)*100),
+  CostGrow = c(round(sens.costgrow,2)*100, round(spec.costgrow,2)*100)
+)
 
+print(table5)
 
