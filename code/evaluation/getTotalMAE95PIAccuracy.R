@@ -113,3 +113,6 @@ print(paste0("95% PI coverage: ", PI95accuracy)) #0.9797066
 
 MAE<- (sum(abs(meanAtDests-trueDestFloodHeights)) + sum(abs(downscale10m-floodvals5mby10m)))/(length(meanAtDests) + length(downscale10m))
 print(paste0("MAE: ", MAE)) #0.1325829
+
+
+save(PI95accuracy,MAE,file="data/PI95accuracyMAE.RData")

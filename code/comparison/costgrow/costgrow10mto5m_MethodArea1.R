@@ -44,8 +44,8 @@ print(paste0("CostGrow MAE: ", MAE.costgrow))
 floodedCostGrow<- ifelse(wshCostGrow>0,1,0)
 flooded5m<- ifelse(wsh5m>0,1,0)
 
-TPR<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
-TNR<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
+sens.costgrow<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
+spec.costgrow<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
 
 ################################################################################
 #now set the minimum threshold for flooding to be 0.3
@@ -53,10 +53,13 @@ TNR<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0
 floodedCostGrow<- ifelse(wshCostGrow>0.3,1,0)
 flooded5m<- ifelse(wsh5m>0.3,1,0)
 
-TPR<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
-TNR<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
-print(paste0("CostGrow total sensitivity for .3m flood: ", TPR))
-print(paste0("CostGrow total specificity for .3m flood: ", TNR))
+sens.costgrow<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
+spec.costgrow<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
+print(paste0("CostGrow total sensitivity for .3m flood: ", sens.costgrow))
+print(paste0("CostGrow total specificity for .3m flood: ", spec.costgrow))
 
-accuracy<- (length(which(floodedCostGrow==1 & flooded5m==1)) + length(which(floodedCostGrow==0 & flooded5m==0)))/length(flooded5m)
-print(paste0("CostGrow total accuracy for .3m flood: ", accuracy))
+accuracy.costgrow<- (length(which(floodedCostGrow==1 & flooded5m==1)) + length(which(floodedCostGrow==0 & flooded5m==0)))/length(flooded5m)
+print(paste0("CostGrow total accuracy for .3m flood: ", accuracy.costgrow))
+
+save(MAE.costgrow,accuracy.costgrow,sens.costgrow,spec.costgrow,file="data/CostGrowMAEaccuracySensSpec.RData")
+
