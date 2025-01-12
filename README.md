@@ -30,6 +30,8 @@ To complete the analysis more quickly in chunks, perform the following steps:
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 16. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder.
 
+- If you wish to downscale flood projections using CostGrow for comparison, please see the corresponding section at the bottom of the file.
+
 **To run each R script individually not using bash files, follow the steps below. All subsequent folders are located in the `code` folder.**
 
 **Setup**
@@ -115,6 +117,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 4. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
 
 **Comparison to CostGrow**
+*To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
 1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`
 2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`
 3. In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`
