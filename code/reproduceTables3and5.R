@@ -26,9 +26,8 @@ table3 <- data.frame(
   CostGrow = c(round(MAE.costgrow,2), NA, round(accuracy.costgrow,2)*100)
 )
 
-#jpeg(filename="plots/table3.jpeg",width=600,height=500)
+print("Table 3")
 print(table3)
-#dev.off()
 
 #Table 5
 table5 <- data.frame(
@@ -37,5 +36,6 @@ table5 <- data.frame(
   CostGrow = c(round(sens.costgrow,2)*100, round(spec.costgrow,2)*100)
 )
 
+print("Table 5")
 print(table5)
 

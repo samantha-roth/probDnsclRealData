@@ -121,6 +121,7 @@ for(f in 1:length(flood)){
   MAE<- (sum(abs(meanAtDests-trueDestFloodHeights)) + sum(abs(downscale10m-floodvals5mby10m)))/(length(meanAtDests) + length(downscale10m))
   print(paste0("MAE: ", MAE))
   
+  save(PI95accuracy,MAE,file=paste0("data/",flood[f],"/PI95accuracyMAE.RData"))
 }
 
 # "flood2014"

@@ -3,7 +3,8 @@ rm(list=ls())
 
 library(terra)
 
-setwd("C:/Users/svr5482/Documents/GitHub/probDnsclRealData")
+ndArgs(trailingOnly=TRUE)
+setwd(dir)
 
 load("data/coords.5m.RData")
 dem5m<- rast("data/norristown_5m.asc")
@@ -31,8 +32,8 @@ for(f in 1:length(flood)){
   #floodedCostGrow<- ifelse(wshCostGrow>0,1,0)
   #flooded5m<- ifelse(vals5minBds>0,1,0)
   
-  #TPR<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
-  #TNR<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
+  #sens.costgrow<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
+  #spec.costgrow<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
   
   ################################################################################
   #now set the minimum threshold for flooding to be 0.3
@@ -40,12 +41,14 @@ for(f in 1:length(flood)){
   floodedCostGrow<- ifelse(wshCostGrow>0.3,1,0)
   flooded5m<- ifelse(vals5minBds>0.3,1,0)
   
-  TPR<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
-  TNR<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
-  print(paste0("TPR: ",TPR))
-  print(paste0("TNR: ",TNR))
+  sens.costgrow<- length(which(floodedCostGrow==1 & flooded5m==1))/length(which(flooded5m==1))
+  spec.costgrow<- length(which(floodedCostGrow==0 & flooded5m==0))/length(which(flooded5m==0))
+  print(paste0("sensitivity: ",sens.costgrow))
+  print(paste0("specificity: ",spec.costgrow))
   
-  accuracy<- (length(which(floodedCostGrow==1 & flooded5m==1)) + length(which(floodedCostGrow==0 & flooded5m==0)))/length(flooded5m)
-  print(paste0("accuracy: ",accuracy))
+  accuracy.costgrow<- (length(which(floodedCostGrow==1 & flooded5m==1)) + length(which(floodedCostGrow==0 & flooded5m==0)))/length(flooded5m)
+  print(paste0("accuracy: ",accuracy.costgrow))
+  
+  save(MAE.costgrow,accuracy.costgrow,sens.costgrow,spec.costgrow,file=paste0("data/",flood[f],"/CostGrowMAEaccuracySensSpec.RData"))
 }
 

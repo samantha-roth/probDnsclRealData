@@ -38,6 +38,8 @@ for(f in 1:length(flood)){
   
   totAcc<- (nSens_LRW + nSens_LRD + nSpec_LRW + nSpec_LRD)/(nWetFlood+nDryFlood + nWetNoFlood+nDryNoFlood)
   print(paste0("total accuracy: ",totAcc))
+  
+  save(totalSens,totalSpec,totAcc,file=paste0("data/",flood[f],"/SensSpecAccuracy_.3mflood.RData"))
 }
 
 # "flood2014"

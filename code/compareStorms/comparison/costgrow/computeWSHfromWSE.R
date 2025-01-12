@@ -5,9 +5,8 @@ rm(list=ls())
 
 library(terra)
 
-pt<- proc.time()
-
-setwd("C:/Users/svr5482/Documents/GitHub/probDnsclRealData")
+ndArgs(trailingOnly=TRUE)
+setwd(dir)
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 dem5m<- rast("data/norristown_5m.asc")
@@ -18,7 +17,7 @@ flood<- c("flood2014","flood2020","floodfuture")
 
 for(f in 1:length(flood)){
   
-  run<- rast(paste0("data/",flood[f],"/CG.tif"))
+  run<- rast(paste0("data/",flood[f],"/CG_",flood[f],".tif"))
   WSE<- c(as.matrix(extract(run,coords.5m)))
   WSH<- WSE- elev5m
   WSH[which(WSH<0)]<-NA
