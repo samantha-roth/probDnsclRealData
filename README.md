@@ -50,7 +50,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 **Use elevations to predict whether or not a cell is flooded**
 1. In the `evaluation` folder, compute percent of cells flooded in different elevation groups: `floodbyElev.R`
-2. In the `models` foler, fit a gaussian process to model the probability of flooding by elevation: `modelProbFloodbyElev.R`
+2. In the `models` folder, fit a gaussian process to model the probability of flooding by elevation: `modelProbFloodbyElev.R`
 3. In the `dataProcessing` folder, use these GPs to predict the probability of coming from the distribution of flood heights at each high resolution cell within a low resolution dry cell: `getProbFloodatDestLocs.R`
 
 **Find and get the predictive distribution of flooded (at low res) sources cells for dry (at low res) destination cells**
