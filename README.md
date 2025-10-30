@@ -1,7 +1,7 @@
 ## Probabilistic Downscaling for Flood Hazard Models
 
 ## Overview
-This repository stores the entire workflow for the paper "Probabilistic Downscaling for Flood Hazard Models." This includes all data and code used in the analysis and all generated figures.
+This repository stores the entire workflow for the paper "Probabilistic Downscaling for Flood Hazard Models." This includes all data and code used in the analysis and all generated figures. For supplemental information related to the methods and results not provided in the manuscript, please see PDFlood_supplement.pdf.
 
 
 ## Setup
