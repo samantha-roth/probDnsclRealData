@@ -224,3 +224,6 @@ mean(mcmc.output1$chain1[,'sigma'])
 quantile(mcmc.output1$chain1[,'sigma'], probs = c(0.025, 0.975))
 
 quantile(mcmc.output1$chain1[,'beta1'], probs = c(0.025, 0.975))
+
+
+
