@@ -18,3 +18,7 @@ resid<- obs-wsh.10m
 semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid)
 
 #flat semivariogram --> no evidence for spatial correlation.
+
+semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs) 
+
+# increasing semivariogram, but no leveling off point is reached. don't have enough data to find one.
