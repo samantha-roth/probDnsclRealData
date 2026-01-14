@@ -22,3 +22,28 @@ semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid)
 semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs) 
 
 # increasing semivariogram, but no leveling off point is reached. don't have enough data to find one.
+
+
+#now check the residuals for the SLR predictions
+
+load("data/mcmc.output1_thinned")
+
+SLR_mcmc_pred_func<- function(step){
+  return(wsh.10m*beta1_thin[step] + beta0_thin[step])
+}
+
+#get downscaled values using the Bayesian SLR model
+downscale_vals<- matrix(NA, nrow=length(thin_inds), ncol= length(wsh.10m))
+for(i in 1:length(thin_inds)){
+  downscale_vals[i,]<- SLR_mcmc_pred_func(i)
+}
+
+mean_downscale_vals<- apply(downscale_vals,2,mean)
+qs_downscale_vals<- apply(downscale_vals,2,function(x) quantile(x,probs= c(0.025, 0.5, 0.975)))
+
+
+SLR_resids<- obs-mean_downscale_vals
+
+semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids)
+
+#maybe some evidence for spatial structure? I am skeptical

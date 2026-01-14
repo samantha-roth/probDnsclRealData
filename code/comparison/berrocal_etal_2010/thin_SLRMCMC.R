@@ -44,7 +44,7 @@ plot(density(sigma2_samples)); lines(density(sigma2_thin),col="red")
 #all look close enough to being the same
 
 
-save(beta0_thin,beta1_thin,sigma2_thin,file="data/mcmc.output1_thinned")
+save(beta0_thin,beta1_thin,sigma2_thin,thin_inds,file="data/mcmc.output1_thinned")
 
 ptFinal<-proc.time()-pt
 time_thinChain_SLRMCMC<-ptFinal[3]

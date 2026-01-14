@@ -2,10 +2,10 @@ rm(list=ls())
 
 library(terra)
 
-pt<- proc.time()
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+pt<- proc.time()
 
 #load region of interest coordinates
 load("data/boxAroundHWMs.5m.RData")
@@ -20,6 +20,8 @@ load("data/vals5minBdsAroundHWMs.RData")
 run10m<- rast("data/Outputs10m/Run_1.asc")
 run5m<- rast("data/Outputs5m/Run_1.asc")
 
+#load the thinned posterior samples from SLR fit via MCMC
+load("data/mcmc.output1_thinned")
 
 ################################################################################
 #Next we use SLR to downscale WSH at 10m onto 5m grid
