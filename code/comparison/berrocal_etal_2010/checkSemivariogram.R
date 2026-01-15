@@ -14,14 +14,23 @@ obs<- HWMs.df$height[1:5]
 #load the 10m res water surface heights
 load("data/wsh.10m_HWMlocs") 
 
-resid<- obs-wsh.10m
-semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid)
+# resid<- obs-wsh.10m
+# 
+# res_sv_spher<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid, model= "spherical", fit=TRUE) 
+# 
+# res_sv_exp<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid, model= "exponential", fit=TRUE) 
+# 
+# res_sv_gaus<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=resid, model= "gaussian", fit=TRUE) 
+# 
+# # no evidence for spatial correlation.
+# 
+# obs_sv_spher<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs, model= "spherical", fit=TRUE) 
+# 
+# obs_sv_exp<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs, model= "exponential", fit=TRUE) 
+# 
+# obs_sv_gaus<- semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs, model= "gaussian", fit=TRUE) 
 
-#flat semivariogram --> no evidence for spatial correlation.
-
-semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=obs) 
-
-# increasing semivariogram, but no leveling off point is reached. don't have enough data to find one.
+# no evidence for spatial correlation.
 
 
 #now check the residuals for the SLR predictions
@@ -44,6 +53,11 @@ qs_downscale_vals<- apply(downscale_vals,2,function(x) quantile(x,probs= c(0.025
 
 SLR_resids<- obs-mean_downscale_vals
 
-semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids)
+sv_SLR_spher<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "spherical", fit=TRUE, nb= 4)
 
-#maybe some evidence for spatial structure? I am skeptical
+sv_SLR_exp<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "exponential", fit=TRUE, nb= 4)
+
+sv_SLR_gaus<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "gaussian", fit=TRUE, nb= 4)
+
+
+#don't see evidence of spatial correlation from any of the models considered
