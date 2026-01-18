@@ -60,4 +60,11 @@ sv_SLR_exp<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resid
 sv_SLR_gaus<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "gaussian", fit=TRUE, nb= 4)
 
 
+sv_exp_fit_pars<- sv_SLR_exp$snr
+sv_gaus_fit_pars<- sv_SLR_gaus$snr
+sv_spher_fit_pars<- sv_SLR_spher$snr
+
+save(sv_exp_fit_pars,file="data/sv_exp_fit_pars")
+save(sv_gaus_fit_pars,file="data/sv_gaus_fit_pars")
+save(sv_spher_fit_pars,file="data/sv_spher_fit_pars")
 #don't see evidence of spatial correlation from any of the models considered
