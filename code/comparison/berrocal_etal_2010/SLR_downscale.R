@@ -1,9 +1,11 @@
-rm(list=ls())
+#downscale using the Bayesian version of SLR
 
-library(terra)
+rm(list=ls())
 
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
 
 pt<- proc.time()
 
@@ -50,10 +52,4 @@ save(qs_downscale_vals,file="data/qs_SLR_downscale_vals")
 ptFinal<-proc.time()-pt
 time_SLRMCMC_downscale10mAroundHWMs<-ptFinal[3]
 save(time_SLRMCMC_downscale10mAroundHWMs, file= "data/time_SLRMCMC_downscale10mAroundHWMs.RData")
-
-mean((wsh.5m-mean_downscale_vals)^2) #MSE
-sqrt(mean((wsh.5m-mean_downscale_vals)^2)) #RMSE
-
-mean(abs(wsh.5m-mean_downscale_vals)) #MAE
-
 

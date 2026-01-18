@@ -42,7 +42,7 @@ model1 <- nimbleCode({
 initial.values.function.model1 <- function() {
   return(list(beta0 = rnorm(1, mean=0, sd=3),
               beta1 = rnorm(1, mean=0, sd=3), 
-              sigma2 = rinvgamma(1, shape= 1, scale=1)))
+              sigma2 = rinvgamma(1, shape= 2, scale=1)))
 }
 
 #narrow, informed by SLR
