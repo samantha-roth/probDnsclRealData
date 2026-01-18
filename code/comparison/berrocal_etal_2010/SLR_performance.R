@@ -42,6 +42,8 @@ for(i in 1:length(thin_inds)){
   downscale_vals[i,]<- SLR_mcmc_pred_func(i)
 }
 
+downscale_vals[which(downscale_vals<0)]<- 0
+
 load("data/mean_SLR_downscale_vals")
 load("data/qs_SLR_downscale_vals")
 

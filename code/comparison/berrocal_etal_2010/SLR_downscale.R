@@ -42,9 +42,10 @@ for(i in 1:length(thin_inds)){
   downscale_vals[i,]<- SLR_mcmc_pred_func(i)
 }
 
+downscale_vals[which(downscale_vals<0)]<- 0
+
 mean_downscale_vals<- apply(downscale_vals,2,mean)
 qs_downscale_vals<- apply(downscale_vals,2,function(x) quantile(x,probs= c(0.025, 0.5, 0.975)))
-
 
 save(mean_downscale_vals,file="data/mean_SLR_downscale_vals")
 save(qs_downscale_vals,file="data/qs_SLR_downscale_vals")
