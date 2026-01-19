@@ -2,6 +2,7 @@
 
 rm(list=ls())
 
+library(ggplot2)
 library(terra)
 
 setwd("/Users/f007f8t/Documents/GitHub/probDnsclRealData")
@@ -47,6 +48,8 @@ for(t in 1:length(threshold)){
   predNoFloodInds_WetLowRes[t,]<- ifelse(pNoFlood>=threshold[t],1,0)
 }
 
+whichNoFlood5mInds_WetLowRes<- which(floodvals5mby10m<=0.3)
+whichFlood5mInds_WetLowRes<- which(floodvals5mby10m>0.3)
 ################################################################################
 ################################################################################
 #now consider high resolution cells within dry low resolution cells
@@ -100,3 +103,60 @@ for(t in 1:length(threshold)){
   predNoFloodInds_DryLowRes[t,]<- ifelse(totProbleq.3>=threshold[t],1,0)
 }
 
+
+whichNoFlood5mInds_DryLowRes<- which(trueDestFloodHeights<=0.3)
+whichFlood5mInds_DryLowRes<- which(trueDestFloodHeights>0.3)
+################################################################################
+################################################################################
+########################### get TPR and FPR ####################################
+################################################################################
+################################################################################
+
+#counting flooded as positive and not flooded as negative, need TPR = TP/P and FPR = 1- TN/N
+
+TPRbyThreshold<- rep(NA,length(threshold))
+TNRbyThreshold<- rep(NA,length(threshold))
+
+for(t in 1:length(threshold)){
+  predNoFloodInds_DryLowRes_t<- which(predNoFloodInds_DryLowRes[t,]==1)
+  predFloodInds_DryLowRes_t<- which(predNoFloodInds_DryLowRes[t,]==0)
+  
+  predNoFloodInds_WetLowRes_t<- which(predNoFloodInds_WetLowRes[t,]==1)
+  predFloodInds_WetLowRes_t<- which(predNoFloodInds_WetLowRes[t,]==0)
+  
+  
+  TPR_WetLowRes<- length(intersect(predFloodInds_WetLowRes_t, whichFlood5mInds_WetLowRes))/length(whichFlood5mInds_WetLowRes)
+  TPR_DryLowRes<- length(intersect(predFloodInds_DryLowRes_t, whichFlood5mInds_DryLowRes))/length(whichFlood5mInds_DryLowRes)
+  
+  TNR_WetLowRes<- length(intersect(predNoFloodInds_WetLowRes_t, whichNoFlood5mInds_WetLowRes))/length(whichNoFlood5mInds_WetLowRes)
+  TNR_DryLowRes<- length(intersect(predNoFloodInds_DryLowRes_t, whichNoFlood5mInds_DryLowRes))/length(whichNoFlood5mInds_DryLowRes)
+  
+  TPR_all<- (TPR_WetLowRes*length(whichFlood5mInds_WetLowRes) + TPR_DryLowRes*length(whichFlood5mInds_DryLowRes))/(length(whichFlood5mInds_WetLowRes) + length(whichFlood5mInds_DryLowRes))
+  
+  TNR_all<- (TNR_WetLowRes*length(whichNoFlood5mInds_WetLowRes) + TNR_DryLowRes*length(whichNoFlood5mInds_DryLowRes))/(length(whichNoFlood5mInds_WetLowRes) + length(whichNoFlood5mInds_DryLowRes))
+  
+  TPRbyThreshold[t]<- TPR_all
+  TNRbyThreshold[t]<- TNR_all
+}
+
+FPRbyThreshold<- 1-TNRbyThreshold
+
+ROC_data<- data.frame("TPR"= TPRbyThreshold,"FPR"= FPRbyThreshold)
+
+#plot the ROC curve
+plot(FPRbyThreshold,TPRbyThreshold,main="ROC curve"); abline(a = 0, b = 1, col = "red")
+
+filename<- paste0("plots/ROC_curve.jpeg")
+jpeg(file = filename,width = 600,height=500)
+print(ggplot(data=ROC_data,aes(x=FPR,y=TPR))+
+        geom_point(color="red",size=3)+
+        geom_abline(intercept=0,slope=1,lwd = 2) +
+        ylab("True Positive Rate")+ xlab("False Positive Rate")+
+        xlim(0,1) + ylim(0,1) +
+        theme_bw() + 
+        theme(plot.title = element_text(size=24), 
+              axis.title = element_text(size=24),
+              axis.text = element_text(size = 20),
+              legend.text= element_text(size=24),
+              legend.title= element_text(size=24)))
+dev.off()
