@@ -167,7 +167,7 @@ my.constants1 <- list(N = 5,
                      dist = dist_matrix,
                      n_phi0 = n_phi0,
                      n_phi1 = n_phi1,
-                     mu_A11 = log(sqrt(est_partial_sill))-3/2,
+                     mu_A11 = log(sqrt(est_partial_sill))-9/2,
                      mu_beta0 = est_beta0,
                      mu_beta1 = est_beta1,
                      shape_tau2 = 1/(est_nugget)+1
@@ -181,7 +181,7 @@ initial.values.function1 <- function() {
               phi0_ind = sample(1:n_phi0, size= 1),
               phi1_ind = sample(1:n_phi1, size= 1),
               A21 = rnorm(1, mean=0, sd=3),
-              A11 = rlnorm(1, meanlog = log(sqrt(est_partial_sill))-3/2, sdlog = 3),
+              A11 = rlnorm(1, meanlog = log(sqrt(est_partial_sill))-9/2, sdlog = 3),
               A22 = rlnorm(1, meanlog = 0, sdlog = 3)))
 }
 
@@ -260,24 +260,31 @@ MCMCtrace(object = mcmc.output,
           ind = TRUE,
           params = "A22")
 
-#we're inferring basically nothing about phi
-#also sigma2 and tau2 are unstable
 
-# Extract posterior means
-mean(mcmc.output$chain1[,'beta0'])
-mean(mcmc.output$chain1[,'beta1'])
-mean(mcmc.output$chain1[,'tau2'])
-mean(mcmc.output$chain1[,'sigma2'])
-mean(mcmc.output$chain1[,'phi0_ind'])
-mean(mcmc.output$chain1[,'phi1_ind'])
+save(mcmc.output,file="data/berrocal_mcmc.output")
 
-#extract posterior medians
-median(mcmc.output$chain1[,'beta0'])
-median(mcmc.output$chain1[,'beta1'])
-median(mcmc.output$chain1[,'tau2'])
-median(mcmc.output$chain1[,'sigma2'])
-median(mcmc.output$chain1[,'phi0_ind'])
-median(mcmc.output$chain1[,'phi1_ind'])
+#model 1: 
+#we're learning basically nothing about beta0, beta1, phi0, phi1, and A21
+#A11 and A22 estimates are unstable; 
+#tau2 is reinforced as being extremely small
+#A11 and A22 have some very large outliers
 
-# 95% credible intervals
-quantile(mcmc.output$chain1[,'phi0_ind'], probs = c(0.025, 0.975))
+
+# # Extract posterior means
+# mean(mcmc.output$chain1[,'beta0'])
+# mean(mcmc.output$chain1[,'beta1'])
+# mean(mcmc.output$chain1[,'tau2'])
+# mean(mcmc.output$chain1[,'sigma2'])
+# mean(mcmc.output$chain1[,'phi0_ind'])
+# mean(mcmc.output$chain1[,'phi1_ind'])
+# 
+# #extract posterior medians
+# median(mcmc.output$chain1[,'beta0'])
+# median(mcmc.output$chain1[,'beta1'])
+# median(mcmc.output$chain1[,'tau2'])
+# median(mcmc.output$chain1[,'sigma2'])
+# median(mcmc.output$chain1[,'phi0_ind'])
+# median(mcmc.output$chain1[,'phi1_ind'])
+# 
+# # 95% credible intervals
+# quantile(mcmc.output$chain1[,'phi0_ind'], probs = c(0.025, 0.975))
