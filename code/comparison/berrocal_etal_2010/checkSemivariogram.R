@@ -32,8 +32,9 @@ load("data/wsh.10m_HWMlocs")
 
 # no evidence for spatial correlation.
 
+################################################################################
 
-#now check the residuals for the SLR predictions
+#now check the residuals for the SLR predictions when SLR is fit via MCMC
 
 load("data/mcmc.output1_thinned")
 
@@ -50,8 +51,18 @@ for(i in 1:length(thin_inds)){
 mean_downscale_vals<- apply(downscale_vals,2,mean)
 qs_downscale_vals<- apply(downscale_vals,2,function(x) quantile(x,probs= c(0.025, 0.5, 0.975)))
 
-
 SLR_resids<- obs-mean_downscale_vals
+
+################################################################################
+
+# #now check the residuals for the SLR predictions when SLR is fit via MLE
+# 
+# SLR_fit<- lm(obs~wsh.10m) #to inform priors for beta0 and beta1
+# mse<- mean(SLR_fit$residuals^2) #to inform tau2
+# 
+# SLR_resids<- SLR_fit$residuals
+# #results are about the same as when we use SLR fit via MCMC, unsurprisingly
+################################################################################
 
 sv_SLR_spher<- geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "spherical", fit=TRUE, nb= 4)
 
@@ -68,3 +79,12 @@ save(sv_exp_fit_pars,file="data/sv_exp_fit_pars")
 save(sv_gaus_fit_pars,file="data/sv_gaus_fit_pars")
 save(sv_spher_fit_pars,file="data/sv_spher_fit_pars")
 #don't see evidence of spatial correlation from any of the models considered
+
+#partial sill, i.e. sigma^2 in nugget + sigma^2 * exp(-|h|/phi)
+est_partial_sill<- as.numeric(sv_exp_fit_pars["sill"])- as.numeric(sv_exp_fit_pars["nugget"])
+
+est_phi<- as.numeric(-sv_exp_fit_pars["range"]/log(0.05))
+
+est_nugget<- as.numeric(sv_exp_fit_pars["nugget"])
+
+save(est_partial_sill, est_phi, est_nugget,file="data/est_expcov_pars")
