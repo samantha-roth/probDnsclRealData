@@ -76,5 +76,4 @@ mantel.downscale_resids.manhattan<- mantel.rtest(downscale_resids.dist_manhattan
 mantel.preds10m_resids.manhattan<- mantel.rtest(preds10m_resids.dist_manhattan,loc.dist_manhattan)$pvalue
 mantel.preds5m_resids.manhattan<- mantel.rtest(preds5m_resids.dist_manhattan,loc.dist_manhattan)$pvalue
 
-
 #nothing is even remotely near significant for any of the residuals or forms of distance considered
