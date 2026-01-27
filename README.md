@@ -10,6 +10,7 @@ This workflow has been tested using R version 4.2.1 (Funny-Looking Kid) on a lap
 
 The R packages, in the format "package (version)," required for this analysis are `terra` (1.7-3), `akima` (0.6-3.4), `DescTools` (0.99.54), `MASS` (7.3-58.2), `Matrix` (1.6-1.1), `fields` (14.1), `mvtnorm` (1.1-3), and `spam` (2.9-1). 
 For the visualizations, the required R packages are `RColorBrewer` (1.1-3), `ggmap` (3.0.1), `osmdata` (0.2.5), `ggplot2` (3.4.4). Before installing the necessary R packages, we recommend updating R to version 4.4.2 and deleting any dependences for any of these R packages that were installed on an earlier version of R.
+For checking for spatial correlation in residuals, use the package `ade4` (1.7.23) for the Mantel test.
 
 ## Reproduction
 To complete the analysis more quickly in chunks, perform the following steps:
