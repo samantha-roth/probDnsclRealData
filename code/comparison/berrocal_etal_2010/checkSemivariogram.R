@@ -1,5 +1,6 @@
 rm(list=ls())
 graphics.off()
+
 library(nimble)
 library(MCMCvis)
 library(geostats)  # For semivariogram computation
@@ -53,6 +54,7 @@ qs_downscale_vals<- apply(downscale_vals,2,function(x) quantile(x,probs= c(0.025
 
 SLR_resids<- obs-mean_downscale_vals
 
+save(SLR_resids,file="data/BayesianSLR_resids")
 ################################################################################
 
 # #now check the residuals for the SLR predictions when SLR is fit via MLE
