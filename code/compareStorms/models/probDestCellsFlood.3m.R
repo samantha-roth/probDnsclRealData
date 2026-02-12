@@ -1,11 +1,12 @@
 #Get the probability of each destination having a flood height =0 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
 
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
+n_obs=5
 
 flood<- c("flood2014","flood2020","floodfuture")
 
@@ -41,7 +42,8 @@ for(f in 1:length(flood)){
   load("data/varResHWM10mto5m.RData")
   
   for(i in 1:length(meanFromSourceToDest)){
-    probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    #probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
     totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
   }
   

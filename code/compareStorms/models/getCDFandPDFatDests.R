@@ -1,12 +1,13 @@
 
 #plot distribution of flood heights for a few wet and dry destination cells
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
 
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
+n_obs=5
 
 flood<- c("flood2014","flood2020","floodfuture")
 
@@ -47,28 +48,20 @@ for(f in 1:length(flood)){
   #load("data/dnsclFromSourceToDest10m.RData")
   
   ################################################################################
-  probleq0GivenNotPtMass<- rep(NA,length(meanFromSourceToDest))
-  totProbleq0<- rep(NA,length(meanFromSourceToDest))
   
   #load the estimated variance from comparing the downscaled projs to the HWMs
   load("data/varResHWM10mto5m.RData")
   
-  for(i in 1:length(meanFromSourceToDest)){
-    probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
-    totProbleq0[i]<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleq0GivenNotPtMass[i]
-  }
-  
-  
   #get the CDF function for num >=0
   CDFatDestPt<- function(sigma, i, num){
-    probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    #probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleqNumGivenNotPtMass<- pt((num-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
     totProbleqNum<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleqNumGivenNotPtMass
     totProbleqNum
   }
   
   #what's the maximum number that should be plugged into the CDF?
   upper<- max(meanFromSourceToDest)+ 3*sqrt(varResHWM10m)
-  
   
   valsToTest<- seq(0,round(upper+.01,2),by=.01)
   
@@ -120,18 +113,19 @@ for(f in 1:length(flood)){
   
 }
 
+
 # "flood2014"
-# 0.0152666
-# 0.2965307
-# 0.3134155
-# 0.01362548
+# 0.02076612
+# 0.3246911
+# 0.3442864
+# 0.01847802
 # "flood2020"
-# 0.01548453
-# 0.3266434
-# 0.3347636
-# 0.01418637
+# 0.0210809
+# 0.3624458
+# 0.3728146
+# 0.01923213
 # "floodfuture"
-# 0.007249967
-# 0.2611725
-# 0.2675581
-# 0.006456566
+# 0.009718573
+# 0.2766648
+# 0.2828647
+# 0.008650815

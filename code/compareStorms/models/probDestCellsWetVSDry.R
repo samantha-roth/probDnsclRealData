@@ -1,11 +1,13 @@
 #Get the probability of each destination having a flood height =0 
 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
+
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
+n_obs<- 5
 
 flood<- c("flood2014","flood2020","floodfuture")
 
@@ -47,7 +49,8 @@ for(f in 1:length(flood)){
   load("data/varResHWM10mto5m.RData")
   
   for(i in 1:length(meanFromSourceToDest)){
-    probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    #probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleq0GivenNotPtMass[i]<- pt((0-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
     totProbleq0[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq0GivenNotPtMass[i]
   }
   
@@ -128,13 +131,13 @@ for(f in 1:length(flood)){
 
 # "flood2014"
 # "specificity: 0.997334754797441"
-# "sensitivity: 0.366233766233766"
-# "total accuracy: 0.96653568259602"
+# "sensitivity: 0.342857142857143"
+# "total accuracy: 0.965394853593611"
 # "flood2020"
 # "specificity: 0.998842741416999"
-# "sensitivity: 0.381818181818182"
-# "total accuracy: 0.973726409275934"
+# "sensitivity: 0.348484848484849"
+# "total accuracy: 0.972369557172814"
 # "floodfuture"
 # "specificity: 0.999551569506726"
-# "sensitivity: 0.447154471544715"
-# "total accuracy: 0.984726161902684"
+# "sensitivity: 0.439024390243902"
+# "total accuracy: 0.984507964215579"
