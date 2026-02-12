@@ -1,9 +1,10 @@
 #get the total MAE and sensitivity for 10m resolution being downscaled to 5m resolution
 
-rm(list=ls())
-library(terra)
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
+library(terra)
 
 ################################################################################
 #% in 95% PI bounds for wet cells
@@ -90,7 +91,7 @@ for(i in 1:length(trueDestFloodHeights)){
     inCI95Bds[i]<- 0}
 }
 #what % of the time is the truth within the 95% CI bounds? 
-mean(inCI95Bds) #0.9990821
+mean(inCI95Bds) #0.9994492
 
 
 ################################################################################
@@ -99,20 +100,17 @@ mean(inCI95Bds) #0.9990821
 
 #look at overall performance
 #MAE
-mean(abs(meanAtDests-trueDestFloodHeights)) #0.009943803
+mean(abs(meanAtDests-trueDestFloodHeights)) #0.01206497
 
 #MSE
-mean((meanAtDests-trueDestFloodHeights)^2) #0.001208797
+mean((meanAtDests-trueDestFloodHeights)^2) #0.001210008
 
 ################################################################################
 
 #total % within 95% PI bounds
 
 PI95accuracy<- (sum(inCI95Bds)+ sum(isBtwn5mby10m))/(length(inCI95Bds)+ length(isBtwn5mby10m))
-print(paste0("95% PI coverage: ", PI95accuracy)) #0.9797066
+print(paste0("95% PI coverage: ", PI95accuracy)) #0.981910769932355
 
 MAE<- (sum(abs(meanAtDests-trueDestFloodHeights)) + sum(abs(downscale10m-floodvals5mby10m)))/(length(meanAtDests) + length(downscale10m))
-print(paste0("MAE: ", MAE)) #0.1325829
-
-
-save(PI95accuracy,MAE,file="data/PI95accuracyMAE.RData")
+print(paste0("MAE: ", MAE)) #0.133557672735803

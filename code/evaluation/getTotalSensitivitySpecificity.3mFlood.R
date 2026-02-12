@@ -1,7 +1,8 @@
-rm(list=ls())
 
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
 
 load("data/wetCellAccuracy_.3mflood_10mto5m.RData")
 
@@ -25,7 +26,4 @@ totalSpec<- (nSpec_LRW + nSpec_LRD)/(nWetNoFlood+nDryNoFlood)
 print(paste0("Our method's total specificity for .3m flood: ", totalSpec)) #0.9993043
 
 accuracy<- (nSens_LRW + nSens_LRD + nSpec_LRW + nSpec_LRD)/(nWetFlood+nDryFlood + nWetNoFlood+nDryNoFlood)
-print(paste0("Our method's total accuracy for .3m flood: ", accuracy)) #0.9624534
-
-
-save(totalSens,totalSpec,accuracy,file="data/totalSensSpecAccuracy.RData")
+print(paste0("Our method's total accuracy for .3m flood: ", accuracy)) #0.962529452002736

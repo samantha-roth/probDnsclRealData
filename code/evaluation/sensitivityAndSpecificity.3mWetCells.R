@@ -1,9 +1,11 @@
 #get sensitivity and specificity in wet low resolution cell area
 
-rm(list=ls())
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
+
+n_obs=5
 
 ################################################################################
 #load estimated variance
@@ -29,7 +31,8 @@ floodvals5mby10m<- vals5minBds[floodInds10mat5m]
 
 pNoFlood<- rep(NA, length(downscale10m))
 for(i in 1:length(downscale10m)){
-  pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+  #pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+  pNoFlood[i]<- pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
 }
 
 noFlood5mInds<- which(floodvals5mby10m<=0.3)
@@ -54,7 +57,7 @@ predFloodInds<- which(pNoFlood<.5)
 correctFloodInds<- intersect(flood5mInds,predFloodInds)
 
 #sensitivity
-sens_LRW<- length(correctFloodInds)/length(flood5mInds) #0.8998568
+sens_LRW<- length(correctFloodInds)/length(flood5mInds) #0.936932
 
 nFlood<- length(flood5mInds)
 
@@ -62,7 +65,7 @@ nFlood<- length(flood5mInds)
 
 #FIT FOR WET CELLS #(A and B) / (A + B - A and B)
 length(correctFloodInds)/(length(predFloodInds) + length(flood5mInds) -length(correctFloodInds))
-#0.8996224
+#0.936424
 
 save(spec_LRW,sens_LRW,nFlood,nNoFlood,flood5mInds,noFlood5mInds,
      correctFloodInds,predFloodInds,correctNoFloodInds,predNoFloodInds,
