@@ -3,8 +3,8 @@
 rm(list=ls())
 
 library(terra)
-setwd("/Users/f007f8t/Documents/GitHub/probDnsclRealData")
 
+setwd("/Volumes/RothS/probDnsclRealData")
 ################################################################################
 #load estimated variance
 load("data/varResHWM10mto5m.RData")
@@ -22,7 +22,8 @@ load("data/vals5minBdsAroundHWMs.RData")
 load("data/downscale10mto5mAroundHWMs.RData")
 
 #define the vector holding thresholds to be used in the ROC curve
-threshold<- seq(0.01,1,by=0.01)
+# threshold<- c(seq(0.001,0.01,by=.001),seq(0.01,0.99,by=0.01),seq(0.99,1,by=.001))
+threshold<- seq(0.001,1,by=0.001)
 ################################################################################
 
 floodvals5mby10m<- vals5minBds[floodInds10mat5m]
@@ -33,17 +34,17 @@ floodvals5mby10m<- vals5minBds[floodInds10mat5m]
 ################################################################################
 ################################################################################
 
-predNoFloodInds_WetLowRes<- matrix(NA, nrow= length(threshold), ncol= length(floodInds10mat5m))
+predFloodInds_WetLowRes<- matrix(NA, nrow= length(threshold), ncol= length(floodInds10mat5m))
 
-pNoFlood<- rep(NA, length(downscale10m))
+pFlood<- rep(NA, length(downscale10m))
 for(i in 1:length(downscale10m)){
-  pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+  pFlood[i]<- 1-pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
 }
 
-noFlood5mInds_WetLowRes<- ifelse(floodvals5mby10m<=0.3,1,0)
+flood5mInds_WetLowRes<- ifelse(floodvals5mby10m>0.3,1,0)
 
 for(t in 1:length(threshold)){
-  predNoFloodInds_WetLowRes[t,]<- ifelse(pNoFlood>=threshold[t],1,0)
+  predFloodInds_WetLowRes[t,]<- ifelse(pFlood>=threshold[t],1,0)
 }
 
 whichNoFlood5mInds_WetLowRes<- which(floodvals5mby10m<=0.3)
@@ -76,13 +77,14 @@ load("data/shiftbyelevdnsclFromSourceToDest10mto5m_QGIS.RData")
 ################################################################################
 probleq.3GivenNotPtMass<- rep(NA,length(meanFromSourceToDest))
 totProbleq.3<- rep(NA,length(meanFromSourceToDest))
-
+totProbg.3<- rep(NA,length(meanFromSourceToDest))
 #load the estimated variance from comparing the downscaled projs to the HWMs
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
   probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
   totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
+  totProbg.3[i]<- 1-totProbleq.3[i]
 }
 
 ################################################################################
@@ -93,12 +95,12 @@ for(i in 1:length(meanFromSourceToDest)){
 #get the actual flood height at each destination location
 trueDestFloodHeights<- c(as.matrix(extract(run5m,coords.5mDest)))
 
-noFlood5mInds_DryLowRes<- ifelse(trueDestFloodHeights<=0.3,1,0)
+flood5mInds_DryLowRes<- ifelse(trueDestFloodHeights>0.3,1,0)
 
-predNoFloodInds_DryLowRes<- matrix(NA, nrow= length(threshold), ncol= length(trueDestFloodHeights))
+predFloodInds_DryLowRes<- matrix(NA, nrow= length(threshold), ncol= length(trueDestFloodHeights))
 
 for(t in 1:length(threshold)){
-  predNoFloodInds_DryLowRes[t,]<- ifelse(totProbleq.3>=threshold[t],1,0)
+  predFloodInds_DryLowRes[t,]<- ifelse(totProbg.3>=threshold[t],1,0)
 }
 
 
@@ -116,11 +118,11 @@ TPRbyThreshold<- rep(NA,length(threshold))
 TNRbyThreshold<- rep(NA,length(threshold))
 
 for(t in 1:length(threshold)){
-  predNoFloodInds_DryLowRes_t<- which(predNoFloodInds_DryLowRes[t,]==1)
-  predFloodInds_DryLowRes_t<- which(predNoFloodInds_DryLowRes[t,]==0)
+  predNoFloodInds_DryLowRes_t<- which(predFloodInds_DryLowRes[t,]==0)
+  predFloodInds_DryLowRes_t<- which(predFloodInds_DryLowRes[t,]==1)
   
-  predNoFloodInds_WetLowRes_t<- which(predNoFloodInds_WetLowRes[t,]==1)
-  predFloodInds_WetLowRes_t<- which(predNoFloodInds_WetLowRes[t,]==0)
+  predNoFloodInds_WetLowRes_t<- which(predFloodInds_WetLowRes[t,]==0)
+  predFloodInds_WetLowRes_t<- which(predFloodInds_WetLowRes[t,]==1)
   
   
   TPR_WetLowRes<- length(intersect(predFloodInds_WetLowRes_t, whichFlood5mInds_WetLowRes))/length(whichFlood5mInds_WetLowRes)
@@ -138,7 +140,8 @@ for(t in 1:length(threshold)){
 }
 
 FPRbyThreshold<- 1-TNRbyThreshold
+FNRbyThreshold<- 1-TPRbyThreshold
 
-ROC_data<- data.frame("TPR"= TPRbyThreshold,"FPR"= FPRbyThreshold)
+ROC_data<- data.frame("TPR"= TPRbyThreshold,"FPR"= FPRbyThreshold, "TNR"= TNRbyThreshold, "FNR"=FNRbyThreshold)
 
 save(ROC_data,file="data/ROC_data")
