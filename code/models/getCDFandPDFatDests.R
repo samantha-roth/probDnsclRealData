@@ -1,13 +1,15 @@
 #plot distribution of flood heights for a few wet and dry destination cells
 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
+
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
-
 pt<-proc.time()
+
+n_obs=5
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
@@ -32,21 +34,13 @@ predProbFlood5mCost<- c(predProbFlood)
 load("data/shiftbyelevdnsclFromSourceToDest10mto5m_QGIS.RData")
 
 ################################################################################
-probleq0GivenNotPtMass<- rep(NA,length(meanFromSourceToDest))
-totProbleq0<- rep(NA,length(meanFromSourceToDest))
-
 #load the estimated variance from comparing the downscaled projections to the HWMs
 load("data/varResHWM10mto5m.RData")
 
-for(i in 1:length(meanFromSourceToDest)){
-  probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
-  totProbleq0[i]<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleq0GivenNotPtMass[i]
-}
-
-
 #get the CDF function for num >=0
 CDFatDestPt<- function(sigma, i, num){
-  probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  #probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  probleqNumGivenNotPtMass<- pt((num-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
   totProbleqNum<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleqNumGivenNotPtMass
   totProbleqNum
 }

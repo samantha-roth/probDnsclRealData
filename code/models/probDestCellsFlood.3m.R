@@ -1,13 +1,15 @@
 #Get the probability of each destination having a flood height =0 
 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
+
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
-
 pt<-proc.time()
+
+n_obs=5
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
@@ -15,7 +17,6 @@ load("data/coords.5m.RData")
 #load cells of interest outside the low res flooded cells
 load("data/destInds10mat5m.RData")
 coords.5mDest<- coords.5m[destInds10m,]
-
 
 #Now bring in the probability of being in the mapped-to distribution
 load("data/modelProbFloodbyElev/predProbFloodatDest_5mElev10mModel.RData")
@@ -36,7 +37,8 @@ totProbleq.3<- rep(NA,length(meanFromSourceToDest))
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
-  probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  #probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
   totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
 }
 

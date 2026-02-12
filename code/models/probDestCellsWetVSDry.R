@@ -1,13 +1,15 @@
 #Get the probability of each destination having a flood height =0 
 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
+
 rm(list=ls())
 
 library(terra)
 
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
-
 pt<-proc.time()
+
+n_obs=5
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
@@ -36,7 +38,8 @@ totProbleq0<- rep(NA,length(meanFromSourceToDest))
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
-  probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  #probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  probleq0GivenNotPtMass[i]<- pt((0-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
   totProbleq0[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq0GivenNotPtMass[i]
 }
 
@@ -69,7 +72,7 @@ lenNotFloodCorrect/lenNotFlood
 #FIT FOR DRY CELLS #(A and B) / (A + B - A and B)
 lenNotFloodCorrect/(lenProbNotFloodgeq.5 + lenNotFlood -lenNotFloodCorrect)
 #downscaled and shifted by elevation
-#0.9741106 #compared to the number of cells correctly predicted to be dry,
+# 0.9735666 #compared to the number of cells correctly predicted to be dry,
 #the number of additional cells predicted to be dry is small
 
 ################################################################################
@@ -87,12 +90,12 @@ lenFloodCorrect<- length(which(indsProbFloodgeq.5%in%indsFlood)) #Arm
 lenFloodCorrect/lenFlood
 
 #downscaled and shifted by elevation
-#0.3627907: about 2/3 dry cells are identified
+#0.3488372
 
 #FIT FOR FLOODED CELLS #(A and B) / (A + B - A and B)
 lenFloodCorrect/(lenProbFloodgeq.5 + lenFlood -lenFloodCorrect)
 #downscaled and shifted by elevation
-#0.359447= fit
+#0.3456221= fit
 ################################################################################
 
 #TOTAL ACCURACY FOR BOTH WET AND DRY CELLS
@@ -100,7 +103,7 @@ lenFloodCorrect/(lenProbFloodgeq.5 + lenFlood -lenFloodCorrect)
 (lenFloodCorrect+lenNotFloodCorrect)/(lenProbFloodgeq.5+lenProbNotFloodgeq.5)
 
 #downscaled and shifted by elevation
-#0.9744814 that's pretty damn good
+#0.9739306 that's pretty damn good
 
 ################################################################################
 
