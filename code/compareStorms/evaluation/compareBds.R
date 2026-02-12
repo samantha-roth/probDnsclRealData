@@ -1,10 +1,12 @@
 
-rm(list=ls())
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
+rm(list=ls())
+
 pt<-proc.time()
+
+n_obs=5
 
 #load region of interest coordinates
 load("data/boxAroundHWMs.5m.RData")
@@ -28,8 +30,8 @@ for(f in 1:length(flood)){
   ################################################################################
   #10m- downscaled value unshifted
   
-  bdsBox10m<- cbind(downscale10m-1.96*sqrt(varResHWM10m),
-                    downscale10m+1.96*sqrt(varResHWM10m))
+  bdsBox10m<- cbind(downscale10m-qt(0.975,n_obs-1)*sqrt(varResHWM10m),
+                    downscale10m+qt(0.975,n_obs-1)*sqrt(varResHWM10m))
   
   floodvals5mby10m<- vals5minBds[floodInds10mat5m]
   isBtwn5mby10m<- rep(NA,length(floodvals5mby10m))
@@ -38,14 +40,14 @@ for(f in 1:length(flood)){
     isBtwn5mby10m[i]<- floodvals5mby10m[i]>=bdsBox10m[i,1] & floodvals5mby10m[i]<=bdsBox10m[i,2]
   }
   
-  print(paste0("Prop. time projection btwn bds:",mean(isBtwn5mby10m))) #0.9758621
+  print(paste0("Prop. time projection btwn bds:",mean(isBtwn5mby10m))) 
   
   #cor
-  print(paste0("Corr. btwn downscaled & high res:",cor(downscale10m,floodvals5mby10m))) #0.9474791
+  print(paste0("Corr. btwn downscaled & high res:",cor(downscale10m,floodvals5mby10m))) 
   #MAE
-  print(paste0("MAE btwn downscaled & high res:",mean(abs(downscale10m-floodvals5mby10m)))) #0.245623
+  print(paste0("MAE btwn downscaled & high res:",mean(abs(downscale10m-floodvals5mby10m)))) 
   #MSE
-  print(paste0("MSE btwn downscaled & high res:",mean((downscale10m-floodvals5mby10m)^2))) #0.1036816
+  print(paste0("MSE btwn downscaled & high res:",mean((downscale10m-floodvals5mby10m)^2))) 
   
   save(bdsBox10m,file=paste0("data/",flood[f],"/bdsdownscale10mto5mAroundHWMs.RData"))
   ################################################################################
@@ -57,17 +59,17 @@ for(f in 1:length(flood)){
 }
 
 # "flood2014"
-# "Prop. time projection btwn bds:0.952733485193622"
-# "Corr. btwn downscaled & high res:0.986079305664506"
-# "MAE btwn downscaled & high res:0.219612128367305"
+# "Prop. time projection btwn bds:0.958618071374336"
+# "Corr. btwn downscaled & high res:0.986079305664508"
+# "MAE btwn downscaled & high res:0.219612128367306"
 # "MSE btwn downscaled & high res:0.223026028853445"
 # "flood2020"
-# "Prop. time projection btwn bds:0.951287128712871"
-# "Corr. btwn downscaled & high res:0.985488261642151"
+# "Prop. time projection btwn bds:0.956831683168317"
+# "Corr. btwn downscaled & high res:0.985488261642152"
 # "MAE btwn downscaled & high res:0.218941737300598"
 # "MSE btwn downscaled & high res:0.219211621527441"
 # "floodfuture"
-# "Prop. time projection btwn bds:0.964893865173781"
+# "Prop. time projection btwn bds:0.968626078843014"
 # "Corr. btwn downscaled & high res:0.984535555817578"
-# "MAE btwn downscaled & high res:0.240384641532807"
+# "MAE btwn downscaled & high res:0.240384641532806"
 # "MSE btwn downscaled & high res:0.3318466026315"

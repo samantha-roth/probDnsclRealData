@@ -1,11 +1,11 @@
 #get the total MAE and sensitivity for 10m resolution being downscaled to 5m resolution
 
+dir<- commandArgs(trailingOnly=TRUE)
+setwd(dir)
+
 rm(list=ls())
 
 library(terra)
-
-dir<- commandArgs(trailingOnly=TRUE)
-setwd(dir)
 
 flood<- c("flood2014","flood2020","floodfuture")
 
@@ -121,15 +121,14 @@ for(f in 1:length(flood)){
   MAE<- (sum(abs(meanAtDests-trueDestFloodHeights)) + sum(abs(downscale10m-floodvals5mby10m)))/(length(meanAtDests) + length(downscale10m))
   print(paste0("MAE: ", MAE))
   
-  save(PI95accuracy,MAE,file=paste0("data/",flood[f],"/PI95accuracyMAE.RData"))
 }
 
 # "flood2014"
-# "95% Prediction Interval Coverage: 0.980846697575435"
-# "MAE: 0.0976865219590253"
+# "95% Prediction Interval Coverage: 0.98320285779433"
+# "MAE: 0.100623995646726"
 # "flood2020"
-# "95% Prediction Interval Coverage: 0.981074713080489"
-# "MAE: 0.0939594490602081"
+# "95% Prediction Interval Coverage: 0.983278862962681"
+# "MAE: 0.0970662672497713"
 # "floodfuture"
-# "95% Prediction Interval Coverage: 0.97689442882116"
-# "MAE: 0.159626524733717"
+# "95% Prediction Interval Coverage: 0.979402599376758"
+# "MAE: 0.160356101284045"

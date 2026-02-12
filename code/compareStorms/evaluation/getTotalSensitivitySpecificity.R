@@ -1,8 +1,8 @@
 
-rm(list=ls())
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
 
 flood<- c("flood2014","flood2020","floodfuture")
 
@@ -34,11 +34,11 @@ load(paste0("data/",flood[f],"/estProbFloodIndsofInterest_10mto5mElev_QGIS.RData
 }
 
 # "flood2014"
-# "sensitivity: 0.933297277807824"
+# "sensitivity: 0.931674779159906"
 # "specificity: 0.995400788436268"
 # "flood2020"
-# "sensitivity: 0.940676365010391"
+# "sensitivity: 0.938598148498016"
 # "specificity: 0.997711088504578"
 # "floodfuture"
-# "sensitivity: 0.974527431996312"
+# "sensitivity: 0.974412171507607"
 # "specificity: 0.998437848694488"

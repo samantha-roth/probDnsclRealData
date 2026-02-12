@@ -1,9 +1,11 @@
 #get sensitivity and specificity in wet low resolution cell area
 
-rm(list=ls())
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
+
+n_obs=5
 
 #load estimated variance
 load("data/varResHWM10mto5m.RData")
@@ -34,7 +36,8 @@ for(f in 1:length(flood)){
   
   pNoFlood<- rep(NA, length(downscale10m))
   for(i in 1:length(downscale10m)){
-    pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+    #pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+    pNoFlood[i]<- pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
   }
   
   noFlood5mInds<- which(floodvals5mby10m<=.3)
