@@ -3,8 +3,8 @@
 rm(list=ls())
 library(ggplot2)
 
-setwd("/Volumes/RothS/probDnsclRealData")
-
+# setwd("/Volumes/RothS/probDnsclRealData")
+setwd("/Users/f007f8t/Documents/GitHub/probDnsclRealData")
 
 if(!dir.exists("plots")) dir.create("plots")
 

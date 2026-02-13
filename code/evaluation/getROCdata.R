@@ -1,10 +1,13 @@
-#compute ROC curve and AUC
+#compute data for ROC curve and AUC
 
 rm(list=ls())
 
 library(terra)
 
-setwd("/Volumes/RothS/probDnsclRealData")
+# setwd("/Volumes/RothS/probDnsclRealData")
+setwd("/Users/f007f8t/Documents/GitHub/probDnsclRealData")
+
+n_obs=5
 ################################################################################
 #load estimated variance
 load("data/varResHWM10mto5m.RData")
@@ -38,7 +41,7 @@ predFloodInds_WetLowRes<- matrix(NA, nrow= length(threshold), ncol= length(flood
 
 pFlood<- rep(NA, length(downscale10m))
 for(i in 1:length(downscale10m)){
-  pFlood[i]<- 1-pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+  pFlood[i]<- 1-pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
 }
 
 flood5mInds_WetLowRes<- ifelse(floodvals5mby10m>0.3,1,0)
@@ -82,7 +85,7 @@ totProbg.3<- rep(NA,length(meanFromSourceToDest))
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
-  probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
   totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
   totProbg.3[i]<- 1-totProbleq.3[i]
 }
