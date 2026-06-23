@@ -10,20 +10,20 @@ costgrow_WSE<- rast("data/costgrow10mto5m_methodArea1.tif")
 #plot(costgrow_WSE)
 
 dem5m<- rast("data/norristown_5m.asc")
-elev5m<- values(dem5m)
+elev5m<- terra::values(dem5m)
 
 coords.costgrow<- xyFromCell(costgrow_WSE,1:ncell(costgrow_WSE))
 
 coords.dem5m<- xyFromCell(dem5m,1:ncell(dem5m))
 
-cgvals10mto5m<- values(costgrow_WSE)
+cgvals10mto5m<- terra::values(costgrow_WSE)
 
 wshCostGrow10mto5mVals<- cgvals10mto5m-elev5m
 
 wshCostGrow10mto5mVals[which(is.na(wshCostGrow10mto5mVals))]<-0
 
 wshCostGrow10mto5m<- dem5m
-values(wshCostGrow10mto5m)<- wshCostGrow10mto5mVals
+terra::values(wshCostGrow10mto5m)<- wshCostGrow10mto5mVals
 
 plot(wshCostGrow10mto5m)
 

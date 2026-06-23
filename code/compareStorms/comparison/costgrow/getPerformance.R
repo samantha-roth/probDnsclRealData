@@ -3,12 +3,12 @@ rm(list=ls())
 
 library(terra)
 
-ndArgs(trailingOnly=TRUE)
+dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
 load("data/coords.5m.RData")
 dem5m<- rast("data/norristown_5m.asc")
-elev5m<- values(dem5m)
+elev5m<- terra::values(dem5m)
 
 flood<- c("flood2014","flood2020","floodfuture")
 

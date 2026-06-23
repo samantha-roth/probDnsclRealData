@@ -1,4 +1,4 @@
-#install necessary R packages
+#install necessary R packages for analysis
 
 rm(list=ls())
 
