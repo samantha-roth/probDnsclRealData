@@ -30,6 +30,8 @@ To complete the analysis more quickly in chunks, perform the following steps:
 14. Call the bash file `runCodeOtherStormsAfterQGIS.sh`. This should not take more than a few minutes to execute.
 15. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 16. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
+17. Call the bash file `runCodeTestVarSensitivity.sh` to test the sensitivity of the results for Hurricane Ida (2021) to different values of the scale parameter.
+18. Call the bash file `runCodeTestVarSensitivityCompareStorms.sh` to test the sensitivity of the results for other flood events to different values of the scale parameter.
 
 - If you wish to downscale flood projections using CostGrow for comparison, please see the corresponding section at the bottom of the file.
 
