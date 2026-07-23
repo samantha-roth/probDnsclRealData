@@ -2,10 +2,13 @@
 
 rm(list=ls())
 
-library(terra)
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
 
 #load the sampled variances from the empirical distribution 
 load("data/var_samples")
@@ -55,14 +58,16 @@ for(f in 1:length(flood)){
     totProbleq0<- rep(NA,length(meanFromSourceToDest))
     
     for(i in 1:length(meanFromSourceToDest)){
-      probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      # probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      probleq0GivenNotPtMass[i]<- ptt(0, location = meanFromSourceToDest[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
       totProbleq0[i]<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleq0GivenNotPtMass[i]
     }
     
     
     #get the CDF function for num >=0
     CDFatDestPt<- function(sigma, i, num){
-      probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      # probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      probleqNumGivenNotPtMass<- ptt(num, location = meanFromSourceToDest[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
       totProbleqNum<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleqNumGivenNotPtMass
       totProbleqNum
     }

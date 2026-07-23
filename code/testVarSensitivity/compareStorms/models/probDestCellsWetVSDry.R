@@ -2,10 +2,13 @@
 
 rm(list=ls())
 
-library(terra)
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
 
 #load the sampled variances from the empirical distribution 
 load("data/var_samples")
@@ -57,7 +60,8 @@ for(f in 1:length(flood)){
     load("data/varResHWM10mto5m.RData")
     
     for(i in 1:length(meanFromSourceToDest)){
-      probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      # probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+      probleq0GivenNotPtMass[i]<- ptt(0, location = meanFromSourceToDest[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
       totProbleq0[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq0GivenNotPtMass[i]
     }
     
