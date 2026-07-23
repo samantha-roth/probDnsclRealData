@@ -1,10 +1,10 @@
 #compute bounds of 95% prediction interval 
 #for high resultion flood heights within low resolution wet cells
 
-rm(list=ls())
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+rm(list=ls())
 
 load("data/downscale10mto5mAtHWMs.RData")
 downscale10mAtHWMs<- downscale10m; rm(downscale10m)

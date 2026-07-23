@@ -3,11 +3,11 @@
 
 rm(list=ls())
 
-pt<-proc.time()
-
 #load the bilinearly interpolated 10m projections at the HWM locations
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+pt<-proc.time()
 
 load("data/varResHWM10mto5m.RData")
 df=4
