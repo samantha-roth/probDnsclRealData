@@ -2,10 +2,13 @@
 
 rm(list=ls())
 
-library(terra)
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
@@ -43,14 +46,16 @@ for(v in 1: length(var_samples)){
   totProbleq0<- rep(NA,length(meanFromSourceToDest))
   
   for(i in 1:length(meanFromSourceToDest)){
-    probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    # probleq0GivenNotPtMass[i]<- pnorm(0, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleq0GivenNotPtMass[i]<- ptt(0,location=meanFromSourceToDest[i],scale= sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
     totProbleq0[i]<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleq0GivenNotPtMass[i]
   }
   
   
   #get the CDF function for num >=0
   CDFatDestPt<- function(sigma, i, num){
-    probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    # probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleqNumGivenNotPtMass<- ptt(num,location=meanFromSourceToDest[i],scale= sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
     totProbleqNum<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleqNumGivenNotPtMass
     totProbleqNum
   }
@@ -104,7 +109,7 @@ for(v in 1: length(var_samples)){
   
   ptFinal<-proc.time()-pt
   time_getCDFandPDFatDests<-ptFinal[3]
-  save(time_getCDFandPDFatDests, file= paste0("data/var_sample",v,"/var_sample",v,"/time_getCDFandPDFatDests_10mto5mElev_QGIS.RData"))
+  save(time_getCDFandPDFatDests, file= paste0("data/var_sample",v,"/time_getCDFandPDFatDests_10mto5mElev_QGIS.RData"))
   
   ################################################################################
   #plot distribution of flood heights for a few nonflooded destination cells
