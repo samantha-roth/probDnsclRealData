@@ -5,6 +5,8 @@ setwd(dir)
 
 rm(list=ls())
 
+library(crch)
+
 n_obs=5
 
 ################################################################################
@@ -31,8 +33,9 @@ floodvals5mby10m<- vals5minBds[floodInds10mat5m]
 
 pNoFlood<- rep(NA, length(downscale10m))
 for(i in 1:length(downscale10m)){
-  #pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
-  pNoFlood[i]<- pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
+  # pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+  # pNoFlood[i]<- pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
+  pNoFlood[i]<- ptt(0.3, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
 }
 
 noFlood5mInds<- which(floodvals5mby10m<=0.3)
