@@ -3,6 +3,10 @@ rm(list=ls())
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
+library(crch)
+
+n_obs=5
+
 flood<- c("flood2014","flood2020","floodfuture")
 
 #load the sampled variances from the empirical distribution 

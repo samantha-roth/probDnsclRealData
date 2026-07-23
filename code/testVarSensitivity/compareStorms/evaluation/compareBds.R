@@ -4,7 +4,9 @@ rm(list=ls())
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
-pt<-proc.time()
+library(crch)
+
+n_obs=5
 
 #load region of interest coordinates
 load("data/boxAroundHWMs.5m.RData")
@@ -16,8 +18,9 @@ flood<- c("flood2014","flood2020","floodfuture")
 
 for(f in 1:length(flood)){
   
-  print(flood[f])
+  pt<-proc.time()
   
+  print(flood[f])
   
   #load flooded locations at the two lower resolutions being downscaled
   load(paste0("data/",flood[f],"/floodInds10mat5mAroundHWMs.RData"))
@@ -40,8 +43,11 @@ for(f in 1:length(flood)){
     
     #10m- downscaled value unshifted
     
-    bdsBox10m<- cbind(downscale10m-1.96*sqrt(varResHWM10m),
-                      downscale10m+1.96*sqrt(varResHWM10m))
+    bdsBox10m<- matrix(NA, nrow= length(downscale10m),ncol=2)
+    for(i in 1:nrow(bdsBox10m)){
+      bdsBox10m[i,]<- c(qtt(0.025, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf),
+                        qtt(0.975, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf))
+    }
     
     floodvals5mby10m<- vals5minBds[floodInds10mat5m]
     isBtwn5mby10m<- rep(NA,length(floodvals5mby10m))

@@ -5,6 +5,10 @@ rm(list=ls())
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
+library(crch)
+
+n_obs=5
+
 #load the sampled variances from the empirical distribution 
 load("data/var_samples")
 
@@ -40,7 +44,8 @@ for(f in 1:length(flood)){
     
     pNoFlood<- rep(NA, length(downscale10m))
     for(i in 1:length(downscale10m)){
-      pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+      # pNoFlood[i]<- pnorm(0.3, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+      pNoFlood[i]<- ptt(0.3,location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
     }
     
     noFlood5mInds<- which(floodvals5mby10m<=.3)
