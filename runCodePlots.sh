@@ -3,6 +3,9 @@
 DATA_PATH= "/Users/f007f8t/Documents/probDnsclRealData"
 
 cd /storage/work/svr5482/probDnsclRealData/code/plots
+Rscript plot_SLR_resids.R "$DATA_PATH"
+
+cd /storage/work/svr5482/probDnsclRealData/code/plots
 Rscript plotObsVSPreds.R "$DATA_PATH"
 
 cd /storage/work/svr5482/probDnsclRealData/code/plots

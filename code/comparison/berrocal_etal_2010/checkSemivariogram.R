@@ -90,3 +90,9 @@ est_phi<- as.numeric(-sv_exp_fit_pars["range"]/log(0.05))
 est_nugget<- as.numeric(sv_exp_fit_pars["nugget"])
 
 save(est_partial_sill, est_phi, est_nugget,file="data/est_expcov_pars")
+
+filename<- paste0("plots/SLR_res_expcov_sv.jpeg")
+jpeg(file = filename,width = 700,height=450)
+geostats::semivariogram(x=HWMlocs[,"x"],y=HWMlocs[,"y"],z=SLR_resids, model= "exponential", fit=TRUE, nb= 4)
+dev.off()
+
