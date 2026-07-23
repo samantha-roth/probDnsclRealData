@@ -125,15 +125,25 @@ To complete the analysis more quickly in chunks, perform the following steps:
 4. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`.
 5. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute accuracy metrics of costgrow approach: `getPerformance.R`.
 
-**Sensitivity analysis of the scale parameter**
-1. In the `evaluation` folder within the `testVarSensitivity` folder, sample other values of the scale parameter from its distribution: `sampleOtherVars.R`.
-2. In the `evaluation` folder within the `testVarSensitivity` folder, use downscaled flood heights to obtain confidencence interval coverage and width with each sampled scale parameter value: `compareBds.R`.
-3. In the `models` folder within the `testVarSensitivity` folder, compute the total probability of flooding (defined as flood height > 0.3m) at each high resolution cell within a low resolution dry cell with each sampled scale parameter value:`probDestCellsFlood.3m.R`.
-4. In the `models` folder within the `testVarSensitivity` folder, compute the approximate CDF and PDF of the distribution of high resolution flood heights in each low resolution dry cell with each sampled scale parameter value: `getCDFandPDFatDests.R`.
-5. In the `evaluation` folder within the `testVarSensitivity` folder, get the percent of flooded and non-flooded (where flooded is defined as having a flood height >0.3m) cells identified for high resolution cells within low resolution dry cells with each sampled scale parameter value: `sensitivityAndSpecificity.3mWetCells.R`.
-6. In the `evaluation` folder within the `testVarSensitivity` folder, get the percent of flooded and non-flooded (where flooded is defined as having a flood height >0.3m) cells identified for high resolution cells within low resolution dry cells with each sampled scale parameter value: `sensitivityAndSpecificity.3mWetCells.R`
-7. In the `evaluation` folder within the `testVarSensitivity` folder, for all high resolution cells, compute the mean absolute errors and 95% prediction interval coverage with each sampled scale parameter value: `getTotalMAE95PIAccuracy.R`
-8. In the `evaluation` folder within the `testVarSensitivity` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m with each sampled scale parameter value: `getTotalSensitivitySpecificity.3mFlood.R`
+**Sensitivity analysis of the scale parameter. Use scripts located in the `testVarSensitivity` folder**
+*Hurricane Ida*
+1. In the `evaluation` folder, sample other values of the scale parameter from its distribution: `sampleOtherVars.R`.
+The following codes consider each sampled scale parameter value:
+2. In the `evaluation` folder, use downscaled flood heights to obtain confidencence interval coverage and width: `compareBds.R`.
+3. In the `models` folder, compute the total probability of flooding (defined as flood height > 0.3m) at each high resolution cell within a low resolution dry cell:`probDestCellsFlood.3m.R`.
+4. In the `models` folder, compute the approximate CDF and PDF of the distribution of high resolution flood heights in each low resolution dry cell: `getCDFandPDFatDests.R`.
+5. In the `evaluation` folder, get the percent of flooded and non-flooded (where flooded is defined as having a flood height >0.3m) cells identified for high resolution cells within low resolution dry cells: `sensitivityAndSpecificity.3mWetCells.R`.
+6. In the `evaluation` folder, for all high resolution cells, compute the mean absolute errors and 95% prediction interval coverage: `getTotalMAE95PIAccuracy.R`
+7. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
+
+*Other flood events. Use scripts located in the `compareStorms` subfolder of the `testVarSensitivity` folder.*
+The following codes consider each storm and each sampled scale parameter value:
+1. In the `evaluation` folder, use downscaled flood heights to obtain confidencence interval coverage and width: `compareBds.R`.
+2. In the `models` folder, compute the total probability of flooding (defined as flood height > 0.3m) at each high resolution cell within a low resolution dry cell: `probDestCellsFlood.3m.R`.
+3. In the `models` folder, compute the approximate CDF and PDF of the distribution of high resolution flood heights in each low resolution dry cell : `getCDFandPDFatDests.R`.
+4. In the `evaluation` folder, get the percent of flooded and non-flooded (where flooded is defined as having a flood height >0.3m) cells identified for high resolution cells within low resolution dry cells: `sensitivityAndSpecificity.3mWetCells.R`
+5. 6. In the `evaluation` folder, for all high resolution cells, compute the mean absolute errors and 95% prediction interval coverage: `getTotalMAE95PIAccuracy.R`
+7. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
 
 ## Contact
 Please contact Samantha Roth at samantha.m.roth@dartmouth.edu with any reproduction issues.
