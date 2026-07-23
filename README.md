@@ -111,11 +111,12 @@ To complete the analysis more quickly in chunks, perform the following steps:
 3. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
 
 **Plot results**
-1. In the `plots` folder, plot the Hurricane Ida observations against the high resolution flood projection values: `plotObsVSPreds.R`
-2. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`.
-3. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
-4. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
-5. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
+1. In the `berrocal_etal_2010` within the `comparison` folder, plot the residuals from regressing the observed flood heights on the simulated low-resolution flood heights in space: `plot_SLR_resids.R`.
+2. In the `berrocal_etal_2010` within the `comparison` folder, plot the empirical semivariogram of the aforementioned residuals: `checkSemivariogram.R`.
+4. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`.
+5. In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`
+6. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
+7. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
 **Comparison to CostGrow**
 *To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
