@@ -5,6 +5,7 @@ setwd(dir)
 
 rm(list=ls())
 
+library(crch)
 library(terra)
 
 pt<-proc.time()
@@ -39,8 +40,9 @@ load("data/varResHWM10mto5m.RData")
 
 #get the CDF function for num >=0
 CDFatDestPt<- function(sigma, i, num){
-  #probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
-  probleqNumGivenNotPtMass<- pt((num-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  # probleqNumGivenNotPtMass<- pnorm(num, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  # probleqNumGivenNotPtMass<- pt((num-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  probleqNumGivenNotPtMass<- ptt(num, location = meanFromSourceToDest[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
   totProbleqNum<- (1-predProbFlood5mCost[i])+predProbFlood5mCost[i]*probleqNumGivenNotPtMass
   totProbleqNum
 }

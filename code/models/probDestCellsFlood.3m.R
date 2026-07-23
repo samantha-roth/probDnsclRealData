@@ -6,6 +6,7 @@ setwd(dir)
 rm(list=ls())
 
 library(terra)
+library(crch)
 
 pt<-proc.time()
 
@@ -37,8 +38,9 @@ totProbleq.3<- rep(NA,length(meanFromSourceToDest))
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
-  #probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
-  probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  # probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+  # probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  probleq.3GivenNotPtMass[i]<- ptt(0.3,location=meanFromSourceToDest[i],scale= sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
   totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
 }
 

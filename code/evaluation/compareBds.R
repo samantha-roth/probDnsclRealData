@@ -7,6 +7,8 @@ setwd(dir)
 
 rm(list=ls())
 
+library(crch)
+
 pt<-proc.time()
 
 load("data/downscale10mto5mAtHWMs.RData")
@@ -40,8 +42,14 @@ load("data/downscale10mto5mAroundHWMs.RData")
 ################################################################################
 #10m- downscaled value unshifted
 
-bdsBox10m<- cbind(downscale10m-qt(0.975,n_obs-1)*sqrt(varResHWM10m),
-                  downscale10m+qt(0.975,n_obs-1)*sqrt(varResHWM10m))
+# bdsBox10m<- cbind(downscale10m-qt(0.975,n_obs-1)*sqrt(varResHWM10m),
+#                   downscale10m+qt(0.975,n_obs-1)*sqrt(varResHWM10m))
+
+bdsBox10m<-matrix(NA, nrow= length(downscale10m),ncol=2)
+for(i in 1:nrow(bdsBox10m)){
+  bdsBox10m[i,]<- c(qtt(0.025, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf),
+                    qtt(0.975, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf))
+}
 
 floodvals5mby10m<- vals5minBds[floodInds10mat5m]
 isBtwn5mby10m<- rep(NA,length(floodvals5mby10m))
@@ -68,8 +76,14 @@ save(bdsBox10m,file="data/bdsdownscale10mto5mAroundHWMs.RData")
 s2CV<- rep(NA, length(obsMinusDnsclPred10m))
 for(i in 1:length(s2CV)) s2CV[i]<- var(obsMinusDnsclPred10m[-i])
 
-bdsBox10m<- cbind(downscale10mAtHWMs-qt(0.975,n_obs-1)*sqrt(s2CV),
-                  downscale10mAtHWMs+qt(0.975,n_obs-1)*sqrt(s2CV))
+# bdsBox10m<- cbind(downscale10mAtHWMs-qt(0.975,n_obs-2)*sqrt(s2CV),
+#                   downscale10mAtHWMs+qt(0.975,n_obs-2)*sqrt(s2CV))
+
+bdsBox10m<- matrix(NA, nrow= length(downscale10mAtHWMs), ncol=2)
+for(i in 1:nrow(bdsBox10m)){
+  bdsBox10m[i,]<- c(qtt(0.025, location = downscale10mAtHWMs[i], scale = sqrt(s2CV[i]), df = n_obs-2, left = 0, right = Inf),
+                    qtt(0.975, location = downscale10mAtHWMs[i], scale = sqrt(s2CV[i]), df = n_obs-2, left = 0, right = Inf))
+}
 
 isBtwn5mby10m<- rep(NA,length(obs))
 
@@ -95,7 +109,5 @@ ptFinal<-proc.time()-pt
 time_downscale10mAllBds<-ptFinal[3]
 save(time_downscale10mAllBds, file= "data/time_downscale10mto5mAllBds.RData")
 
-#compute width of the prediction interval
-2*qt(0.975,n_obs-1)*sqrt(varResHWM10m) #v1
-
-
+# #compute width of the prediction interval
+# 2*qt(0.975,n_obs-1)*sqrt(varResHWM10m) #v1
