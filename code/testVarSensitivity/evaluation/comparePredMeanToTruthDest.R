@@ -3,10 +3,14 @@
 
 rm(list=ls())
 
-library(terra)
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
+
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
