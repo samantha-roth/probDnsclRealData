@@ -3,9 +3,12 @@
 rm(list=ls())
 
 library(terra)
+library(crch)
 
-# setwd("/Volumes/RothS/probDnsclRealData")
-setwd("/Users/f007f8t/Documents/GitHub/probDnsclRealData")
+# dir<- commandArgs(trailingOnly=TRUE)
+# setwd(dir)
+
+setwd("/Users/f007f8t/probDnsclRealData_truncatedT")
 
 n_obs=5
 ################################################################################
@@ -41,7 +44,8 @@ predFloodInds_WetLowRes<- matrix(NA, nrow= length(threshold), ncol= length(flood
 
 pFlood<- rep(NA, length(downscale10m))
 for(i in 1:length(downscale10m)){
-  pFlood[i]<- 1-pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
+  # pFlood[i]<- 1-pt((0.3-downscale10m[i])/(sqrt(varResHWM10m)),n_obs-1)
+  pFlood[i]<- 1-ptt(0.3, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
 }
 
 flood5mInds_WetLowRes<- ifelse(floodvals5mby10m>0.3,1,0)
@@ -85,7 +89,8 @@ totProbg.3<- rep(NA,length(meanFromSourceToDest))
 load("data/varResHWM10mto5m.RData")
 
 for(i in 1:length(meanFromSourceToDest)){
-  probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  # probleq.3GivenNotPtMass[i]<- pt((0.3-meanFromSourceToDest[i])/(sqrt(varResHWM10m)),n_obs-1)
+  probleq.3GivenNotPtMass[i]<- ptt(0.3, location = meanFromSourceToDest[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
   totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
   totProbg.3[i]<- 1-totProbleq.3[i]
 }
@@ -148,3 +153,4 @@ FNRbyThreshold<- 1-TPRbyThreshold
 ROC_data<- data.frame("TPR"= TPRbyThreshold,"FPR"= FPRbyThreshold, "TNR"= TNRbyThreshold, "FNR"=FNRbyThreshold)
 
 save(ROC_data,file="data/ROC_data")
+
