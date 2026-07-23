@@ -5,6 +5,9 @@ rm(list=ls())
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
+library(crch)
+
+n_obs=5
 ################################################################################
 #load flooded locations at the two lower resolutions being downscaled
 load("data/floodInds10mat5mAroundHWMs.RData")
@@ -34,7 +37,8 @@ for(v in 1: length(var_samples)){
   
   pNoFlood<- rep(NA, length(downscale10m))
   for(i in 1:length(downscale10m)){
-    pNoFlood[i]<- pnorm(0, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+    # pNoFlood[i]<- pnorm(0, mean= downscale10m[i], sd = sqrt(varResHWM10m))
+    pNoFlood[i]<- ptt(0,location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
   }
   
   noFlood5mInds<- which(floodvals5mby10m==0)

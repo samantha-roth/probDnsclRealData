@@ -4,6 +4,10 @@ rm(list=ls())
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
 
+library(crch)
+
+n_obs=5
+
 #load the sampled variances from the empirical distribution 
 load("data/var_samples")
 

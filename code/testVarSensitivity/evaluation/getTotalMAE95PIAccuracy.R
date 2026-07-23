@@ -1,9 +1,14 @@
 #get the total MAE and sensitivity for 10m resolution being downscaled to 5m resolution
 
 rm(list=ls())
-library(terra)
+
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
 
 ################################################################################
 #load flooded locations at the lower resolution being downscaled
@@ -96,8 +101,6 @@ for(v in 1: length(var_samples)){
   #what % of the time is the truth within the 95% CI bounds? 
   mean(inCI95Bds) #0.9990821
   
-  ################################################################################
-  
   #get MAE for dry cells
   
   #look at overall performance
@@ -108,14 +111,24 @@ for(v in 1: length(var_samples)){
   mean((meanAtDests-trueDestFloodHeights)^2) #0.001208797
   
   ################################################################################
+  #get average 95% PI width
   
-  #total % within 95% PI bounds
+  PIwidths_wet<- bdsBox10m[,2]- bdsBox10m[,1]
+  PIwidths_dry<- CI95mat[,2]-CI95mat[,1]
   
-  PI95accuracy<- (sum(inCI95Bds)+ sum(isBtwn5mby10m))/(length(inCI95Bds)+ length(isBtwn5mby10m))
-  print(paste0("95% PI coverage: ", PI95accuracy)) #0.9797066
+  mean95PIwidth<- mean(c(PIwidths_wet,PIwidths_dry))
+  
+  ################################################################################
+  #final performance metrics
   
   MAE<- (sum(abs(meanAtDests-trueDestFloodHeights)) + sum(abs(downscale10m-floodvals5mby10m)))/(length(meanAtDests) + length(downscale10m))
   print(paste0("MAE: ", MAE)) #0.1325829
   
+  PI95accuracy<- (sum(inCI95Bds)+ sum(isBtwn5mby10m))/(length(inCI95Bds)+ length(isBtwn5mby10m))
+  print(paste0("95% PI coverage: ", PI95accuracy)) #0.9797066
+
+  print(paste0("Mean 95% PI width: ", mean95PIwidth))
+  
+
   
 }

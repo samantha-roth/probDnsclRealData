@@ -6,6 +6,8 @@ setwd(dir)
 
 rm(list=ls())
 
+library(crch)
+
 load("data/downscale10mto5mAtHWMs.RData")
 downscale10mAtHWMs<- downscale10m; rm(downscale10m)
 
@@ -13,6 +15,8 @@ downscale10mAtHWMs<- downscale10m; rm(downscale10m)
 load("data/HWMsdf.RData")
 HWMlocs<- as.matrix(HWMs.df[,c("x","y")]); HWMlocs<- HWMlocs[1:5,]
 obs<- HWMs.df$height[1:5]
+
+n_obs<- length(obs)
 
 obsMinusDnsclPred10m<- obs- downscale10mAtHWMs
 
@@ -43,8 +47,13 @@ for(v in 1: length(var_samples)){
   
   varResHWM10m<- var_samples[v]
   
-  bdsBox10m<- cbind(downscale10m-1.96*sqrt(varResHWM10m),
-                    downscale10m+1.96*sqrt(varResHWM10m))
+  print(paste0("var sample: ", var_samples[v]))
+  
+  bdsBox10m<- matrix(NA, nrow= length(downscale10m),ncol=2)
+  for(i in 1:nrow(bdsBox10m)){
+    bdsBox10m[i,]<- c(qtt(0.025, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf),
+                      qtt(0.975, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf))
+  }
   
   floodvals5mby10m<- vals5minBds[floodInds10mat5m]
   isBtwn5mby10m<- rep(NA,length(floodvals5mby10m))
