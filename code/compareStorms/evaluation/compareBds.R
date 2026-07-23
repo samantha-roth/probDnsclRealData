@@ -4,6 +4,8 @@ setwd(dir)
 
 rm(list=ls())
 
+library(crch)
+
 pt<-proc.time()
 
 n_obs=5
@@ -30,8 +32,14 @@ for(f in 1:length(flood)){
   ################################################################################
   #10m- downscaled value unshifted
   
-  bdsBox10m<- cbind(downscale10m-qt(0.975,n_obs-1)*sqrt(varResHWM10m),
-                    downscale10m+qt(0.975,n_obs-1)*sqrt(varResHWM10m))
+  # bdsBox10m<- cbind(downscale10m-qt(0.975,n_obs-1)*sqrt(varResHWM10m),
+  #                   downscale10m+qt(0.975,n_obs-1)*sqrt(varResHWM10m))
+  
+  bdsBox10m< matrix(NA, nrow= length(downscale10m),ncol=2)
+  for(i in 1:nrow(bdsBox10m)){
+    bdsBox10m[i,]<- c(qtt(0.025, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf),
+                      qtt(0.975, location = downscale10m[i], scale = sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf))
+  }
   
   floodvals5mby10m<- vals5minBds[floodInds10mat5m]
   isBtwn5mby10m<- rep(NA,length(floodvals5mby10m))
