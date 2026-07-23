@@ -2,10 +2,13 @@
 
 rm(list=ls())
 
-library(terra)
-
 dir<- commandArgs(trailingOnly=TRUE)
 setwd(dir)
+
+library(terra)
+library(crch)
+
+n_obs=5
 
 run5m<- rast("data/Outputs5m/Run_1.asc")
 load("data/coords.5m.RData")
@@ -40,7 +43,8 @@ for(v in 1: length(var_samples)){
   totProbleq.3<- rep(NA,length(meanFromSourceToDest))
   
   for(i in 1:length(meanFromSourceToDest)){
-    probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    # probleq.3GivenNotPtMass[i]<- pnorm(0.3, mean = meanFromSourceToDest[i], sd = sqrt(varResHWM10m))
+    probleq.3GivenNotPtMass[i]<- ptt(0.3,location=meanFromSourceToDest[i],scale= sqrt(varResHWM10m), df = n_obs-1, left = 0, right = Inf)
     totProbleq.3[i]<- (1-predProbFlood5mElev[i])+predProbFlood5mElev[i]*probleq.3GivenNotPtMass[i]
   }
   
