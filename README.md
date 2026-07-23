@@ -85,7 +85,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 *Decide on a model structure for our model for the observations*
 1. In the `evaluation` folder, decide on a model structure for our model for the observations: `dnsclAroundHWMs.R`
-2. In the `evaluation` folder, use downscaled Xm flood heights to obtain confidencence interval coverage and width: `compareBds.R`
+2. In the `evaluation` folder, use downscaled flood heights to obtain confidencence interval coverage and width: `compareBds.R`
 
 *Use elevations to predict whether or not a cell is flooded*
 1. In the `evaluation` folder, compute percent of cells flooded in different elevation groups: `floodbyElev.R`
@@ -123,12 +123,15 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 **Comparison to CostGrow**
 *To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
-1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`
-2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`
-3. In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`
-4. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`
-5. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute accuracy metrics of costgrow approach: `getPerformance.R`
+1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`.
+2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`.
+3. In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`.
+4. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`.
+5. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute accuracy metrics of costgrow approach: `getPerformance.R`.
 
+**Sensitivity analysis of the scale parameter**
+1. In the `evaluation` folder within the `testVarSensitivity` folder, sample other values of the scale parameter from its distribution: `sampleOtherVars.R`.
+2. In the `evaluation` folder within the `testVarSensitivity` folder, use downscaled flood heights to obtain confidencence interval coverage and width with each sampled scale parameter value: `compareBds.R`.
 
 ## Contact
 Please contact Samantha Roth at samantha.m.roth@dartmouth.edu with any reproduction issues.
