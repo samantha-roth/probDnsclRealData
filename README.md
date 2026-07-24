@@ -122,9 +122,12 @@ To complete the analysis more quickly in chunks, perform the following steps:
 2. Figure 1b: In the `berrocal_etal_2010` within the `comparison` folder, plot the empirical semivariogram of the aforementioned residuals: `checkSemivariogram.R`.
 4. Figure 2a: In the `plots` folder within the `comparison` folder, plot the high resolution binary results: `plotHR.3mFlood.R`.
 5. Figure 2b: In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`.
-6. In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R` and whether or not flooding occurred based on whether the probability of flooding was >0.5: `plot.3mFlood_Dnscl`.
-7. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
-8. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
+6. Figure 2c: In the `plots` folder, plot probability of flooding over the entire region: `plotP.3mFlood_Dnscl.R`.
+7. Figure 2d:
+8. Figure 3a:
+9. Figure 3b:
+10. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
+11. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
 **Sensitivity analysis of the scale parameter. Use scripts located in the `testVarSensitivity` folder**
 *Hurricane Ida*
