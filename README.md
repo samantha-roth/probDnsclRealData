@@ -129,7 +129,9 @@ To complete the analysis more quickly in chunks, perform the following steps:
 11. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
 **Sensitivity analysis of the scale parameter. Use scripts located in the `testVarSensitivity` folder**
+
 *Hurricane Ida*
+
 1. In the `evaluation` folder, sample other values of the scale parameter from its distribution: `sampleOtherVars.R`.
 The following codes consider each sampled scale parameter value:
 2. In the `evaluation` folder, use downscaled flood heights to obtain confidencence interval coverage and width: `compareBds.R`.
@@ -140,7 +142,9 @@ The following codes consider each sampled scale parameter value:
 7. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
 
 *Other flood events. Use scripts located in the `compareStorms` subfolder of the `testVarSensitivity` folder.*
+
 The following codes consider each storm and each sampled scale parameter value:
+
 1. In the `evaluation` folder, use downscaled flood heights to obtain confidencence interval coverage and width: `compareBds.R`.
 2. In the `models` folder, compute the total probability of flooding (defined as flood height > 0.3m) at each high resolution cell within a low resolution dry cell: `probDestCellsFlood.3m.R`.
 3. In the `models` folder, compute the approximate CDF and PDF of the distribution of high resolution flood heights in each low resolution dry cell : `getCDFandPDFatDests.R`.
