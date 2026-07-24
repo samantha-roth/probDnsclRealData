@@ -124,8 +124,7 @@ To complete the analysis more quickly in chunks, perform the following steps:
 5. Figure 2b: In the `plots` folder, plot binary results of the costgrow approach: `plotCostGrow.3mFlood.R`.
 6. Figure 2c: In the `plots` folder, plot probability of flooding over the entire region according to PDFlood: `plotP.3mFlood_Dnscl.R`.
 7. Figure 2d: In the `plots` folder, plot probability of flooding over the entire region according to SB2010: `plotP.3mFlood_SB2010.R`
-8. Figure 3a:
-9. Figure 3b:
+8. Figures 3a and b: In the `plots` folder, for both PDFlood and SB2010 and across all flood events, plot the true positive rate against the false positive rate and the true negative rate against the false negative rate: `plotROCcurves_PDFloodvsSB2010_allFloods.R`
 10. Compare generated figures in the `plots` folder to the figure with the same name in the `compareResults` folder.
 11. Run `reproduceTables3and5.R` and `reproduceTables4and6.R` in the `code` folder. Compare the output to the corresponding tables in the `compareResults` folder.
 
