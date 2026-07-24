@@ -111,7 +111,9 @@ To complete the analysis more quickly in chunks, perform the following steps:
 3. In the `evaluation` folder, for all high resolution cells, compute the percent of flooded and non-flooded cells identified when flooding is defined by a flood height >0.3m: `getTotalSensitivitySpecificity.3mFlood.R`
 
 **Comparison to CostGrow**
+
 *To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
+
 1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`.
 2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`.
 3. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`.
