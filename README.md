@@ -131,7 +131,7 @@ In the `berrocal_etal_2010` folder within the `comparison` folder,
 7. Check whether the residuals from the simplified model indicate spatial correlation using the semivariogram: `checkSemivariogram.R`.
 8. Check whether the residuals from the simplified model indicate spatial correlation using Moran's I statistic: `moransI_test.R`.
 9. Check whether the residuals from the simplified model indicate spatial correlation using the Mantel test: `mantel_test.R`.
-10. Check whether the residuals from the simplified model indicate spatial correlation by plotting them in space: `plot_SLR_resids.R`.
+10. Check whether the residuals from the simplified model indicate spatial correlation by plotting them in space: `plot_SB2010_resids.R`.
 11. Get data for plotting true positive rate vs false positive rate and true negative rate vs false negative rate: `SB2010_getROCdata.R`.
 
 
