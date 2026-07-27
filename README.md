@@ -133,6 +133,7 @@ In the `berrocal_etal_2010` folder within the `comparison` folder,
 9. Check whether the residuals from the simplified model indicate spatial correlation using the Mantel test: `mantel_test.R`.
 10. Check whether the residuals from the simplified model indicate spatial correlation by plotting them in space: `plot_SB2010_resids.R`.
 11. Get data for plotting true positive rate vs false positive rate and true negative rate vs false negative rate: `SB2010_getROCdata.R`.
+12. Evaluate performance of SB2010 approach using same performance metrics as with other approaches: `SB2010_performance.R`.
 
 
 **Plot results**
