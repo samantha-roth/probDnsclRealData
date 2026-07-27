@@ -121,10 +121,10 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 **Comparison to SB2010**
 1. In the `berrocal_etal_2010` folder within the `comparison` folder, extract the low-resolution flood heights at the high water mark locations: `getWSH10m_HWMlocs.R`.
-2. In the `berrocal_etal_2010` folder within the `comparison` folder, fit a Bayesian simple linear regression model via MCMC: `SLR_Nimble.R`.
-3. In the `berrocal_etal_2010` folder within the `comparison` folder, get the posterior means of the SLR model parameters: `SLR_mcmcMeans.R`.
-4. In the `berrocal_etal_2010` folder within the `comparison` folder, thin the Markov chain for the SLR model parameters: `thin_SLRMCMC.R`.
-5. 
+2. In the `berrocal_etal_2010` folder within the `comparison` folder, fit the SB2010 model via MCMC: `SLR_Nimble.R`.
+3. In the `berrocal_etal_2010` folder within the `comparison` folder, get the posterior means of the model parameters: `SLR_mcmcMeans.R`.
+4. In the `berrocal_etal_2010` folder within the `comparison` folder, thin the Markov chain for the model parameters: `thin_SLRMCMC.R`.
+5. In the `berrocal_etal_2010` folder within the `comparison` folder, get the distribution of high-resolution flood heights at each grid cell using SB2010 model: `SLR_downscale.R`. 
 
 **Plot results**
 1. Figure 1a: In the `berrocal_etal_2010` within the `comparison` folder, plot the residuals from regressing the observed flood heights on the simulated low-resolution flood heights in space: `plot_SLR_resids.R`.
