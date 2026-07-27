@@ -114,10 +114,15 @@ To complete the analysis more quickly in chunks, perform the following steps:
 
 *To downscale projections using CostGrow within QGIS, please follow the steps available at https://github.com/cefect/FloodRescaler*
 
-1. In the `costgrow` folder within the `comparison` folder, compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`.
-2. In the `costgrow` folder within the `comparison` folder, plot results of the costgrow approach: `plotCostGrow_Spatial.R`.
-3. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`.
-4. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute accuracy metrics of costgrow approach: `getPerformance.R`.
+In the `costgrow` folder within the `comparison` folder:
+
+1. Compute accuracy metrics of costgrow approach: `costgrow10mto5m_MethodArea1.R`.
+2. Plot results of the costgrow approach: `plotCostGrow_Spatial.R`.
+
+In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder:
+
+3. Compute WSE from the WSH output by CostGrow: `computeWSHfromWSE.R`.
+4. Compute accuracy metrics of costgrow approach: `getPerformance.R`.
 
 **Comparison to SB2010**
 
