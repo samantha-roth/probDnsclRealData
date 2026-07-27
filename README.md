@@ -120,11 +120,20 @@ To complete the analysis more quickly in chunks, perform the following steps:
 4. In the `costgrow` folder within the `comparison` folder within the `compareStorms` folder, compute accuracy metrics of costgrow approach: `getPerformance.R`.
 
 **Comparison to SB2010**
-1. In the `berrocal_etal_2010` folder within the `comparison` folder, extract the low-resolution flood heights at the high water mark locations: `getWSH10m_HWMlocs.R`.
-2. In the `berrocal_etal_2010` folder within the `comparison` folder, fit the SB2010 model via MCMC: `SLR_Nimble.R`.
-3. In the `berrocal_etal_2010` folder within the `comparison` folder, get the posterior means of the model parameters: `SLR_mcmcMeans.R`.
-4. In the `berrocal_etal_2010` folder within the `comparison` folder, thin the Markov chain for the model parameters: `thin_SLRMCMC.R`.
-5. In the `berrocal_etal_2010` folder within the `comparison` folder, get the distribution of high-resolution flood heights at each grid cell using SB2010 model: `SLR_downscale.R`. 
+
+In the `berrocal_etal_2010` folder within the `comparison` folder,
+
+1. Extract the low-resolution flood heights at the high water mark locations: `getWSH10m_HWMlocs.R`.
+2. Fit the SB2010 model via MCMC: `SB2010_Nimble.R`.
+3. Get the posterior means of the model parameters: `SB2010_mcmcMeans.R`.
+4. Thin the Markov chain for the model parameters: `SB2010_thinMCMC.R`.
+6. Get the distribution of high-resolution flood heights at each grid cell using SB2010 model: `SB2010_downscale.R`.
+7. Check whether the residuals from the simplified model indicate spatial correlation using the semivariogram: `checkSemivariogram.R`.
+8. Check whether the residuals from the simplified model indicate spatial correlation using Moran's I statistic: `moransI_test.R`.
+9. Check whether the residuals from the simplified model indicate spatial correlation using the Mantel test: `mantel_test.R`.
+10. Check whether the residuals from the simplified model indicate spatial correlation by plotting them in space: `plot_SLR_resids.R`.
+11. Get data for plotting true positive rate vs false positive rate and true negative rate vs false negative rate: `SB2010_getROCdata.R`.
+
 
 **Plot results**
 1. Figure 1a: In the `berrocal_etal_2010` within the `comparison` folder, plot the residuals from regressing the observed flood heights on the simulated low-resolution flood heights in space: `plot_SLR_resids.R`.
